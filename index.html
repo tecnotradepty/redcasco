@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RED Casco Antiguo | El Epicentro del Arranque</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
     <style>
         /* === TOKENS DE DISEÑO - DISK CREATIVO OS === */
         :root {
-            --bg-base: #050505; /* Negro más profundo tipo plantilla */
+            --bg-base: #050505;
             --bg-card: #111111;
             --border-thin: rgba(255, 255, 255, 0.08);
             --text-main: #F5F5F5;
@@ -20,10 +22,10 @@
             --red-glow: rgba(215, 25, 32, 0.15);
             --font-head: 'Playfair Display', serif;
             --font-body: 'Inter', sans-serif;
+            --font-hand: 'Caveat', cursive;
             --max-width: 1600px;
             --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             --transition-brutal: all 0.6s cubic-bezier(0.87, 0, 0.13, 1);
-            /* Espaciado fluido */
             --fluid-gap: clamp(1.5rem, 4vw, 3rem);
             --section-pad: clamp(5rem, 10vw, 10rem);
         }
@@ -38,17 +40,6 @@
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
             line-height: 1.5;
-        }
-
-        /* Iluminación base (Club Vibe) */
-        body::before {
-            content: '';
-            position: fixed;
-            top: -20%; left: -10%;
-            width: 120vw; height: 120vh;
-            background: radial-gradient(circle at 50% 20%, var(--red-glow) 0%, transparent 50%);
-            z-index: -1;
-            pointer-events: none;
         }
 
         h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 400; letter-spacing: -0.02em; }
@@ -69,105 +60,64 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(5, 5, 5, 0.85);
+            background: rgba(5, 5, 5, 0.6);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             z-index: 1000;
-            border-bottom: 1px solid var(--border-thin);
+            border-bottom: 1px solid rgba(255,255,255,0.03);
         }
         
-        .nav-brand-img {
-            height: 32px;
-            width: auto;
-            display: block;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 3rem;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 500;
-        }
-        .nav-links a {
-            color: var(--text-silver);
-            position: relative;
-            padding: 0.5rem 0;
-            transition: var(--transition-smooth);
-        }
+        .nav-brand-img { height: 32px; width: auto; display: block; }
+        .nav-links { display: flex; gap: 3rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 500; }
+        .nav-links a { color: var(--text-silver); position: relative; padding: 0.5rem 0; transition: var(--transition-smooth); }
         .nav-links a.active, .nav-links a:hover { color: var(--text-main); }
-        .nav-links a::after {
-            content: ''; position: absolute;
-            bottom: 0; left: 0;
-            width: 0%; height: 1px;
-            background: var(--red-brand);
-            transition: var(--transition-smooth);
-        }
+        .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 1px; background: var(--red-brand); transition: var(--transition-smooth); }
         .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
-
-        .user-nav-actions {
-            display: flex;
-            align-items: center;
-        }
+        
         .btn-profile-nav {
-            border: 1px solid var(--border-thin);
-            color: var(--text-main);
-            padding: 0.6rem 1.4rem;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-weight: 600;
+            border: 1px solid var(--border-thin); color: var(--text-main); padding: 0.6rem 1.4rem;
+            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600;
+            display: flex; align-items: center; gap: 0.6rem; transition: var(--transition-smooth);
+        }
+        .btn-profile-nav:hover { border-color: var(--red-brand); background: rgba(215, 25, 32, 0.05); }
+        .points-indicator { width: 6px; height: 6px; background: var(--red-brand); border-radius: 50%; box-shadow: 0 0 8px var(--red-brand); }
+
+        /* === HERO SECTION INMERSIVO (CROWD BACKGROUND) === */
+        .hero {
+            position: relative;
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            gap: 0.6rem;
-            transition: var(--transition-smooth);
-        }
-        .btn-profile-nav:hover {
-            border-color: var(--red-brand);
-            background: rgba(215, 25, 32, 0.05);
-        }
-        .points-indicator {
-            width: 6px; height: 6px;
-            background: var(--red-brand);
-            border-radius: 50%;
-            display: inline-block;
-            box-shadow: 0 0 8px var(--red-brand);
+            /* Fundición de Gradientes + Imagen Multitud de Fondo */
+            background: 
+                linear-gradient(to bottom, transparent 80%, var(--bg-base) 100%),
+                linear-gradient(to right, rgba(5,5,5,0.95) 0%, rgba(5,5,5,0.85) 40%, rgba(5,5,5,0.2) 100%),
+                url('https://github.com/tecnotradepty/redcasco/blob/b5fbb815b261b2448d16b6d1e0a8987445f35b2c/imagenes/file_00000000306081f585d4d5f483e72be5.png?raw=true') center/cover no-repeat;
+            padding-top: 5rem;
+            overflow: hidden;
         }
 
-        /* === HERO SECTION INMERSIVO === */
-        .hero {
-            min-height: 100vh;
-            padding-top: 8rem;
-            padding-bottom: 4rem;
-            display: flex;
-            align-items: center;
-            position: relative;
-        }
         .hero-grid {
             display: grid;
-            grid-template-columns: 1fr 1.2fr;
+            grid-template-columns: 1.2fr 0.8fr;
             gap: var(--fluid-gap);
             align-items: center;
             width: 100%;
+            position: relative;
+            z-index: 2;
         }
-        .hero-text-content { position: relative; z-index: 2; }
         
-        .hero-tag {
-            color: var(--red-brand);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
+        /* Contenido Izquierdo (Marca y Tipografía) */
+        .hero-text-content { position: relative; }
+        
+        .hero-main-icon {
+            height: 60px;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 4px 20px rgba(215, 25, 32, 0.4));
         }
-        .hero-tag::before { content: ''; width: 40px; height: 1px; background: var(--red-brand); }
-        
+
         .hero-title {
-            font-size: clamp(3.5rem, 7vw, 7.5rem);
+            font-size: clamp(4rem, 8vw, 8rem);
             line-height: 0.9;
             margin-bottom: 1.5rem;
             text-transform: uppercase;
@@ -180,296 +130,141 @@
             font-weight: 400;
             display: block;
         }
-        .hero-slogan {
-            font-size: clamp(1.2rem, 2vw, 1.5rem);
-            font-family: var(--font-head);
-            color: var(--text-main);
-            margin-bottom: 2rem;
-            font-style: italic;
+
+        .hero-description {
+            color: var(--text-silver);
+            font-size: clamp(1rem, 1.5vw, 1.15rem);
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            line-height: 1.6;
+            max-width: 480px;
             border-left: 2px solid var(--red-brand);
             padding-left: 1.2rem;
         }
         
-        .hero-ctas {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-            flex-wrap: wrap;
-        }
+        .hero-ctas { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+        
         .btn-primary-red {
-            background: var(--red-brand);
-            color: #fff;
-            padding: 1.2rem 2.5rem;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+            background: var(--red-brand); color: #fff; padding: 1.2rem 2.5rem;
+            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 700;
         }
         .btn-primary-red:hover { background: #f01e26; transform: translateY(-2px); box-shadow: 0 10px 25px var(--red-glow); }
         
         .btn-secondary-outline {
-            border: 1px solid var(--border-thin);
-            color: var(--text-main);
-            padding: 1.2rem 2.5rem;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+            border: 1px solid rgba(255,255,255,0.3); color: var(--text-main); padding: 1.2rem 2.5rem;
+            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600;
         }
-        .btn-secondary-outline:hover { border-color: var(--text-main); background: rgba(255,255,255,0.03); }
+        .btn-secondary-outline:hover { border-color: var(--text-main); background: rgba(255,255,255,0.05); }
 
-        /* Estética Flash Editorial */
-        .hero-media-wrapper {
+        /* Contenido Derecho (Adorno Fotográfico Flotante - Polaroid) */
+        .hero-adornment-wrapper {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .editorial-frame {
+            background: #fff;
+            padding: clamp(8px, 1.5vw, 12px);
+            padding-bottom: clamp(50px, 6vw, 70px);
+            transform: rotate(4deg);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8), 0 0 100px rgba(215, 25, 32, 0.1);
+            width: clamp(250px, 22vw, 360px);
             position: relative;
-            height: clamp(500px, 70vh, 800px);
-            width: 100%;
-            overflow: hidden;
-            border: 1px solid var(--border-thin);
-        }
-        .hero-image-frame {
-            width: 100%; height: 100%;
-            background-image: url('https://github.com/tecnotradepty/redcasco/blob/b79bc4401effd37219ce81f19c3bea0f60d1f6f8/imagenes/file_00000000aeb481f5a222e5996e301761.png?raw=true');
-            background-size: cover;
-            background-position: center;
-            filter: contrast(120%) saturate(85%) brightness(0.85);
             transition: var(--transition-brutal);
+            cursor: pointer;
         }
-        .hero-media-wrapper:hover .hero-image-frame { transform: scale(1.05); filter: contrast(110%) saturate(100%) brightness(1); }
-        
-        /* === EVENTOS / TICKETERA (CARDS ESTILO PLANTILLA) === */
+        .editorial-frame:hover {
+            transform: rotate(0deg) scale(1.05) translateY(-10px);
+            box-shadow: 0 35px 60px rgba(0,0,0,0.9), 0 0 120px rgba(215, 25, 32, 0.2);
+        }
+
+        .editorial-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: contrast(115%) saturate(90%);
+        }
+
+        .frame-caption {
+            position: absolute;
+            bottom: clamp(15px, 2.5vw, 25px);
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: #050505;
+            font-family: var(--font-hand);
+            font-size: clamp(1.4rem, 2vw, 1.8rem);
+            font-weight: 700;
+            transform: rotate(-2deg);
+        }
+
+        /* === TAQUILLA / CARDS === */
         .section-space { padding: var(--section-pad) 0; }
         .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: clamp(3rem, 5vw, 5rem);
-            border-bottom: 1px solid var(--border-thin);
-            padding-bottom: 1.5rem;
+            display: flex; justify-content: space-between; align-items: flex-end;
+            margin-bottom: clamp(3rem, 5vw, 5rem); border-bottom: 1px solid var(--border-thin); padding-bottom: 1.5rem;
         }
-        .section-title-wrap h2 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            line-height: 1;
-        }
-        .link-view-all {
-            color: var(--red-brand);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+        .section-title-wrap h2 { font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1; }
+        .link-view-all { color: var(--red-brand); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; display: flex; align-items: center; gap: 0.5rem; }
         .link-view-all:hover { gap: 1rem; color: #fff; }
 
-        .events-promo-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: var(--fluid-gap);
-        }
-        
-        /* Diseño de Tarjeta Ultra Premium */
-        .promo-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-thin);
-            display: block;
-            position: relative;
-            overflow: hidden;
-            transition: var(--transition-smooth);
-        }
+        .events-promo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--fluid-gap); }
+        .promo-card { background: var(--bg-card); border: 1px solid var(--border-thin); display: block; position: relative; overflow: hidden; transition: var(--transition-smooth); }
         .promo-card:hover { border-color: var(--red-brand); transform: translateY(-4px); box-shadow: 0 15px 40px rgba(0,0,0,0.8); }
-        
-        .promo-thumb {
-            height: clamp(250px, 30vh, 350px);
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            overflow: hidden;
-        }
-        /* Efecto viñeta fotográfica interior */
-        .promo-thumb::after {
-            content: ''; position: absolute; inset: 0;
-            box-shadow: inset 0 0 60px rgba(0,0,0,0.6);
-            transition: opacity 0.4s;
-        }
+        .promo-thumb { height: clamp(250px, 30vh, 350px); position: relative; overflow: hidden; }
+        .promo-thumb::after { content: ''; position: absolute; inset: 0; box-shadow: inset 0 0 60px rgba(0,0,0,0.6); transition: opacity 0.4s; }
         .promo-card:hover .promo-thumb::after { opacity: 0; }
-        .promo-thumb-img {
-            width: 100%; height: 100%;
-            background-size: cover; background-position: center;
-            filter: contrast(120%) saturate(80%);
-            transition: var(--transition-brutal);
-        }
+        .promo-thumb-img { width: 100%; height: 100%; background-size: cover; background-position: center; filter: contrast(120%) saturate(80%); transition: var(--transition-brutal); }
         .promo-card:hover .promo-thumb-img { transform: scale(1.08); filter: contrast(110%) saturate(110%); }
-
-        .promo-badge {
-            position: absolute;
-            top: 1.2rem; right: 1.2rem;
-            background: var(--bg-base);
-            border: 1px solid var(--red-brand);
-            color: var(--red-brand);
-            font-size: 0.65rem;
-            font-weight: 700;
-            padding: 0.3rem 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            z-index: 2;
-        }
-        
+        .promo-badge { position: absolute; top: 1.2rem; right: 1.2rem; background: var(--bg-base); border: 1px solid var(--red-brand); color: var(--red-brand); font-size: 0.65rem; font-weight: 700; padding: 0.3rem 0.8rem; text-transform: uppercase; letter-spacing: 1.5px; z-index: 2; }
         .promo-body { padding: 2rem; position: relative; }
-        .promo-date {
-            color: var(--red-brand);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 600;
-            margin-bottom: 0.8rem;
-        }
-        .promo-name {
-            font-size: clamp(1.4rem, 2vw, 1.8rem);
-            margin-bottom: 1.5rem;
-            color: var(--text-main);
-            font-family: var(--font-head);
-            line-height: 1.1;
-        }
-        .promo-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--border-thin);
-        }
+        .promo-date { color: var(--red-brand); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; margin-bottom: 0.8rem; }
+        .promo-name { font-size: clamp(1.4rem, 2vw, 1.8rem); margin-bottom: 1.5rem; color: var(--text-main); font-family: var(--font-head); line-height: 1.1; }
+        .promo-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 1.5rem; border-top: 1px solid var(--border-thin); }
         .promo-price { font-size: 0.85rem; color: var(--text-silver); }
         .promo-price strong { color: #fff; font-size: 1.1rem; }
-        .btn-card-action {
-            color: var(--red-brand);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-weight: 700;
-        }
+        .btn-card-action { color: var(--red-brand); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; }
 
-        /* === GALERÍA MASONRY VISCERAL === */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            grid-auto-rows: clamp(150px, 20vw, 280px);
-            gap: clamp(1rem, 2vw, 1.5rem);
-        }
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border: 1px solid var(--border-thin);
-            background: var(--bg-card);
-        }
-        .gallery-img { 
-            width: 100%; height: 100%; object-fit: cover;
-            filter: contrast(115%) saturate(85%);
-            transition: var(--transition-brutal);
-        }
+        /* === GALERÍA (MASONRY GRID) === */
+        .gallery-grid { display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-rows: clamp(150px, 20vw, 280px); gap: clamp(1rem, 2vw, 1.5rem); }
+        .gallery-item { position: relative; overflow: hidden; border: 1px solid var(--border-thin); background: var(--bg-card); }
+        .gallery-img { width: 100%; height: 100%; object-fit: cover; filter: contrast(115%) saturate(85%); transition: var(--transition-brutal); }
         .gallery-item:hover .gallery-img { transform: scale(1.04); filter: contrast(120%) saturate(100%); }
-        
-        .gallery-caption {
-            position: absolute;
-            bottom: 0; left: 0; width: 100%;
-            padding: 2rem 1.5rem 1.2rem;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-            opacity: 0; transform: translateY(10px);
-            transition: var(--transition-smooth);
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 600;
-        }
+        .gallery-caption { position: absolute; bottom: 0; left: 0; width: 100%; padding: 2rem 1.5rem 1.2rem; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); opacity: 0; transform: translateY(10px); transition: var(--transition-smooth); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
         .gallery-item:hover .gallery-caption { opacity: 1; transform: translateY(0); }
+        .g-span-7 { grid-column: span 7; grid-row: span 2; } .g-span-5 { grid-column: span 5; grid-row: span 1; } .g-span-5-2 { grid-column: span 5; grid-row: span 1; } .g-span-12 { grid-column: span 12; grid-row: span 2; }
 
-        /* Clases de Layout Asimétrico (Masonry) */
-        .g-span-7 { grid-column: span 7; grid-row: span 2; }
-        .g-span-5 { grid-column: span 5; grid-row: span 1; }
-        .g-span-5-2 { grid-column: span 5; grid-row: span 1; }
-        .g-span-12 { grid-column: span 12; grid-row: span 2; }
-
-        /* === TEASER MESA VIP (MINI PLANO) === */
-        .vip-teaser-block {
-            background: var(--bg-card);
-            border: 1px solid var(--border-thin);
-            padding: clamp(3rem, 6vw, 6rem);
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--fluid-gap);
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .vip-teaser-block::after {
-            content: 'VIP'; position: absolute;
-            right: -2rem; bottom: -5rem;
-            font-family: var(--font-head); font-size: 20rem;
-            color: rgba(255,255,255,0.02); pointer-events: none;
-        }
-        
-        .mock-map {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            padding: 2rem;
-            border: 1px solid var(--border-thin);
-            background: var(--bg-base);
-        }
-        .mock-table {
-            height: 60px;
-            border: 1px solid #333;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 0.7rem; color: #555;
-            transition: var(--transition-smooth);
-        }
+        /* === TEASER VIP === */
+        .vip-teaser-block { background: var(--bg-card); border: 1px solid var(--border-thin); padding: clamp(3rem, 6vw, 6rem); display: grid; grid-template-columns: 1fr 1fr; gap: var(--fluid-gap); align-items: center; position: relative; overflow: hidden; }
+        .vip-teaser-block::after { content: 'VIP'; position: absolute; right: -2rem; bottom: -5rem; font-family: var(--font-head); font-size: 20rem; color: rgba(255,255,255,0.02); pointer-events: none; }
+        .mock-map { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; padding: 2rem; border: 1px solid var(--border-thin); background: var(--bg-base); }
+        .mock-table { height: 60px; border: 1px solid #333; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: #555; transition: var(--transition-smooth); }
         .mock-table.available { border-color: var(--red-brand); color: var(--red-brand); background: rgba(215,25,32,0.05); }
         .mock-table.available:hover { background: var(--red-brand); color: #fff; cursor: pointer; }
 
         /* === FOOTER === */
-        .footer {
-            border-top: 1px solid var(--border-thin);
-            padding: 6rem 0 2rem 0;
-            background: var(--bg-base);
-        }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: var(--fluid-gap);
-            margin-bottom: 5rem;
-        }
+        .footer { border-top: 1px solid var(--border-thin); padding: 6rem 0 2rem 0; background: var(--bg-base); }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--fluid-gap); margin-bottom: 5rem; }
         .footer-logo-img { height: 35px; margin-bottom: 1.5rem; }
         .footer-desc { color: var(--text-muted); font-size: 0.85rem; max-width: 320px; line-height: 1.6; }
-        .footer-col-title {
-            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px;
-            color: var(--red-brand); margin-bottom: 1.5rem; font-weight: 700;
-        }
-        .footer-links { list-style: none; }
-        .footer-links li { margin-bottom: 0.8rem; }
-        .footer-links a { color: var(--text-silver); font-size: 0.85rem; transition: var(--transition-smooth); }
-        .footer-links a:hover { color: #fff; }
-        
-        .footer-bottom {
-            display: flex; justify-content: space-between; align-items: center;
-            padding-top: 2rem; border-top: 1px solid var(--border-thin);
-            font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;
-        }
+        .footer-col-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--red-brand); margin-bottom: 1.5rem; font-weight: 700; }
+        .footer-links { list-style: none; } .footer-links li { margin-bottom: 0.8rem; } .footer-links a { color: var(--text-silver); font-size: 0.85rem; transition: var(--transition-smooth); } .footer-links a:hover { color: #fff; }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; border-top: 1px solid var(--border-thin); font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
 
-        /* Responsive Architecture (Mobile First Adjustments) */
+        /* Responsive Architecture */
         @media (max-width: 992px) {
-            .hero-grid { grid-template-columns: 1fr; text-align: center; }
-            .hero-tag { justify-content: center; }
-            .hero-tag::before { display: none; }
-            .hero-slogan { border-left: none; padding-left: 0; }
+            .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 4rem; }
+            .hero-main-icon { margin: 0 auto 2rem; }
+            .hero-description { margin: 0 auto 2.5rem; border-left: none; padding-left: 0; }
             .hero-ctas { justify-content: center; }
+            .hero-adornment-wrapper { justify-content: center; }
+            .editorial-frame { transform: rotate(2deg); margin: 0; }
             .vip-teaser-block { grid-template-columns: 1fr; text-align: center; }
             .mock-map { max-width: 400px; margin: 0 auto; }
             .footer-grid { grid-template-columns: repeat(2, 1fr); }
+            /* Gradiente ajustado para móvil donde el texto está centrado */
+            .hero { background: linear-gradient(to bottom, rgba(5,5,5,0.95) 0%, rgba(5,5,5,0.7) 60%, var(--bg-base) 100%), url('https://github.com/tecnotradepty/redcasco/blob/b5fbb815b261b2448d16b6d1e0a8987445f35b2c/imagenes/file_00000000306081f585d4d5f483e72be5.png?raw=true') center/cover no-repeat; }
         }
         @media (max-width: 768px) {
             .nav-links { display: none; }
@@ -504,26 +299,33 @@
     </nav>
 
     <header class="hero">
-        <div class="container">
+        <div class="container" style="width: 100%;">
             <div class="hero-grid">
+                
                 <div class="hero-text-content">
-                    <div class="hero-tag">Casco Antiguo, PTY</div>
+                    <img src="https://github.com/tecnotradepty/redcasco/blob/6cb2757b42fbf3c33b6b1d084fe620e25caaa940/imagenes/ca85f8d8-87d7-4781-9767-02d599c7c670.png?raw=true" alt="Icono RED" class="hero-main-icon">
+                    
                     <h1 class="hero-title">
-                        Cero<br><em>Filtros.</em>
+                        Exclusividad<br><em>Sin Filtro.</em>
                     </h1>
-                    <p class="hero-slogan">"Pórtate mal, pásalo bien."</p>
-                    <p class="hero-description" style="color: var(--text-silver); margin-bottom: 2.5rem; font-weight: 300; line-height: 1.6; max-width: 450px;">
-                        No somos una discoteca genérica. Somos el epicentro de la vida nocturna de Panamá. Alta energía, gente exclusiva y curaduría musical internacional.
+                    
+                    <p class="hero-description">
+                        No somos una discoteca genérica. Somos el epicentro de la vida nocturna en Casco Antiguo. Alta energía, trato PR exclusivo y la mejor música de la ciudad.
                     </p>
+                    
                     <div class="hero-ctas">
-                        <a href="paginas/ticket.html" class="btn-primary-red">Taquilla Digital</a>
-                        <a href="paginas/vip.html" class="btn-secondary-outline">Trato de PR (VIP)</a>
+                        <a href="paginas/ticket.html" class="btn-primary-red">Adquirir Tickets</a>
+                        <a href="paginas/vip.html" class="btn-secondary-outline">Reservas VIP</a>
                     </div>
                 </div>
 
-                <div class="hero-media-wrapper">
-                    <div class="hero-image-frame"></div>
+                <div class="hero-adornment-wrapper">
+                    <div class="editorial-frame">
+                        <img src="https://github.com/tecnotradepty/redcasco/blob/b5fbb815b261b2448d16b6d1e0a8987445f35b2c/imagenes/file_00000000a558820cbe446bd735415308.png?raw=true" alt="Vibras RED">
+                        <div class="frame-caption">Pórtate mal, pásalo bien.</div>
+                    </div>
                 </div>
+
             </div>
         </div>
     </header>
@@ -599,17 +401,14 @@
                     <img src="https://github.com/tecnotradepty/redcasco/blob/b79bc4401effd37219ce81f19c3bea0f60d1f6f8/imagenes/file_00000000306081f585d4d5f483e72be5.png?raw=true" class="gallery-img" alt="RED Crowd">
                     <div class="gallery-caption">Main Room Energy</div>
                 </div>
-                
                 <div class="gallery-item g-span-5">
                     <img src="https://github.com/tecnotradepty/redcasco/blob/b79bc4401effd37219ce81f19c3bea0f60d1f6f8/imagenes/file_0000000007c881f5a32edb68ce809fe5.png?raw=true" class="gallery-img" alt="RED VIP">
                     <div class="gallery-caption">Exclusive Access</div>
                 </div>
-
                 <div class="gallery-item g-span-5-2">
                     <img src="https://github.com/tecnotradepty/redcasco/blob/b79bc4401effd37219ce81f19c3bea0f60d1f6f8/imagenes/file_00000000a558820cbe446bd735415308.png?raw=true" class="gallery-img" alt="RED Lighting">
                     <div class="gallery-caption">Unfiltered Nights</div>
                 </div>
-
                 <div class="gallery-item g-span-12">
                     <img src="https://github.com/tecnotradepty/redcasco/blob/b79bc4401effd37219ce81f19c3bea0f60d1f6f8/imagenes/file_000000002a7081f59c4912e73f62634f.png?raw=true" class="gallery-img" alt="RED Atmosphere">
                     <div class="gallery-caption">True Casco Antiguo Experience</div>
@@ -622,14 +421,13 @@
         <div class="container">
             <div class="vip-teaser-block">
                 <div>
-                    <div class="hero-tag" style="margin-bottom: 1rem;">Protocolo de Reserva</div>
+                    <div class="hero-tag" style="color: var(--red-brand); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 3px; font-weight: 700; margin-bottom: 1rem;">Protocolo de Reserva</div>
                     <h2 style="font-size: clamp(2rem, 3.5vw, 3rem); margin-bottom: 1rem; line-height: 1.1;">Tu Espacio.<br>Tus Reglas.</h2>
                     <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem; max-width: 400px;">
                         Selecciona tu mesa directamente desde nuestro mapa digital. Consumo mínimo garantizado, fast-pass en la entrada y atención dedicada.
                     </p>
                     <a href="paginas/vip.html" class="btn-primary-red">Abrir Mapa de Mesas</a>
                 </div>
-                
                 <div class="mock-map">
                     <div class="mock-table">T1</div>
                     <div class="mock-table available">T2</div>
@@ -647,9 +445,7 @@
             <div class="footer-grid">
                 <div>
                     <img src="https://github.com/tecnotradepty/redcasco/blob/6cb2757b42fbf3c33b6b1d084fe620e25caaa940/imagenes/ca85f8d8-87d7-4781-9767-02d599c7c670.png?raw=true" alt="RED Casco Antiguo" class="footer-logo-img">
-                    <p class="footer-desc">
-                        El verdadero arranque del Casco Antiguo. High energy, trato exclusivo. Calle 9na, Ciudad de Panamá.
-                    </p>
+                    <p class="footer-desc">El verdadero arranque del Casco Antiguo. High energy, trato exclusivo. Calle 9na, Ciudad de Panamá.</p>
                 </div>
                 <div>
                     <div class="footer-col-title">Accesos Rápidos</div>
@@ -669,13 +465,11 @@
                 <div>
                     <div class="footer-col-title">Horarios & Protocolo</div>
                     <p style="color: var(--text-silver); font-size: 0.8rem; line-height: 1.8;">
-                        Jueves a Sábado<br>
-                        10:00 PM – Hasta el amanecer<br>
+                        Jueves a Sábado<br>10:00 PM – Hasta el amanecer<br>
                         <span style="color: var(--red-brand); font-weight: 600;">Dress to impress.</span>
                     </p>
                 </div>
             </div>
-
             <div class="footer-bottom">
                 <div>&copy; 2026 RED CASCO ANTIGUO. RESERVADOS TODOS LOS DERECHOS.</div>
                 <div>ENGINEERED BY DISK CREATIVO</div>
