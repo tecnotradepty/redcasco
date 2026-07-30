@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RED Casco Antiguo | Pórtate Mal, Pásalo Bien</title>
+    <title>RED Casco Antiguo | El Epicentro del Arranque</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -14,10 +14,10 @@
             --bg-card: #111111;
             --bg-glass: rgba(17, 17, 17, 0.75);
             --text-main: #F5F5F5;
-            --text-muted: #777777;
+            --text-muted: #888888;
             --text-silver: #B8B8B8;
             --red-brand: #D71920;
-            --red-glow: rgba(215, 25, 32, 0.18);
+            --red-glow: rgba(215, 25, 32, 0.12);
             --font-head: 'Playfair Display', serif;
             --font-body: 'Inter', sans-serif;
             --max-width: 1600px;
@@ -37,13 +37,12 @@
             line-height: 1.5;
         }
 
-        /* Ambiente cinemático de iluminación roja */
         body::before {
             content: '';
             position: fixed;
-            top: -30%; left: -20%;
-            width: 140vw; height: 140vh;
-            background: radial-gradient(circle at 50% 20%, var(--red-glow) 0%, transparent 55%);
+            top: -20%; left: -10%;
+            width: 120vw; height: 120vh;
+            background: radial-gradient(circle at 50% 20%, var(--red-glow) 0%, transparent 60%);
             z-index: -1;
             pointer-events: none;
         }
@@ -58,40 +57,25 @@
             padding: 0 4rem;
         }
 
-        /* === BARRA SUPERIOR (NAVBAR) === */
+        /* === NAVBAR === */
         .navbar {
             position: fixed;
             top: 0; left: 0; width: 100%;
-            padding: 1.25rem 4rem;
+            padding: 1.2rem 4rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(8, 8, 8, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            background: rgba(8, 8, 8, 0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         }
-        .nav-brand {
-            font-family: var(--font-head);
-            font-size: 1.8rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .nav-brand span { color: var(--red-brand); }
-        .nav-brand .badge-tag {
-            font-family: var(--font-body);
-            font-size: 0.6rem;
-            letter-spacing: 1px;
-            background: var(--red-brand);
-            color: #fff;
-            padding: 2px 6px;
-            text-transform: uppercase;
-            font-weight: 600;
+        
+        .nav-brand-img {
+            height: 35px;
+            width: auto;
+            display: block;
         }
 
         .nav-links {
@@ -108,20 +92,15 @@
             padding: 0.5rem 0;
             transition: var(--transition-smooth);
         }
-        .nav-links a.active, .nav-links a:hover {
-            color: var(--text-main);
-        }
+        .nav-links a.active, .nav-links a:hover { color: var(--text-main); }
         .nav-links a::after {
-            content: '';
-            position: absolute;
+            content: ''; position: absolute;
             bottom: 0; left: 0;
             width: 0%; height: 2px;
             background: var(--red-brand);
             transition: var(--transition-smooth);
         }
-        .nav-links a:hover::after, .nav-links a.active::after {
-            width: 100%;
-        }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
 
         .user-nav-actions {
             display: flex;
@@ -130,7 +109,7 @@
         }
         .btn-profile-nav {
             background: transparent;
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.15);
             color: var(--text-main);
             padding: 0.6rem 1.4rem;
             font-size: 0.75rem;
@@ -144,8 +123,6 @@
         .btn-profile-nav:hover {
             border-color: var(--red-brand);
             background: var(--red-brand);
-            color: #fff;
-            box-shadow: 0 0 25px var(--red-glow);
         }
         .points-indicator {
             width: 8px; height: 8px;
@@ -157,15 +134,15 @@
         /* === HERO SECTION === */
         .hero {
             min-height: 100vh;
-            padding-top: 8rem;
+            padding-top: 6rem;
             display: flex;
             align-items: center;
             position: relative;
         }
         .hero-grid {
             display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 5rem;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 4rem;
             align-items: center;
             width: 100%;
         }
@@ -181,14 +158,12 @@
             gap: 0.8rem;
         }
         .hero-tag::before {
-            content: '';
-            width: 30px; height: 1px;
-            background: var(--red-brand);
+            content: ''; width: 30px; height: 1px; background: var(--red-brand);
         }
         .hero-title {
-            font-size: clamp(3.8rem, 6.5vw, 7.5rem);
+            font-size: clamp(3.2rem, 5.5vw, 6.5rem);
             line-height: 0.95;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             text-transform: uppercase;
         }
         .hero-title em {
@@ -198,24 +173,25 @@
             font-weight: 400;
         }
         .hero-slogan {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-family: var(--font-head);
-            color: var(--text-silver);
+            color: var(--text-main);
             margin-bottom: 1.5rem;
             font-style: italic;
             border-left: 2px solid var(--red-brand);
             padding-left: 1rem;
         }
         .hero-description {
-            color: var(--text-muted);
-            font-size: 1rem;
-            max-width: 520px;
+            color: var(--text-silver);
+            font-size: 1.05rem;
+            max-width: 480px;
             margin-bottom: 3rem;
             font-weight: 300;
+            line-height: 1.6;
         }
         .hero-ctas {
             display: flex;
-            gap: 1.5rem;
+            gap: 1.2rem;
             align-items: center;
         }
         .btn-primary-red {
@@ -225,7 +201,7 @@
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            font-weight: 600;
+            font-weight: 700;
             display: inline-block;
         }
         .btn-primary-red:hover {
@@ -235,7 +211,7 @@
         }
         .btn-secondary-outline {
             background: transparent;
-            border: 1px solid rgba(255,255,255,0.25);
+            border: 1px solid rgba(255,255,255,0.2);
             color: var(--text-main);
             padding: 1.2rem 2.5rem;
             font-size: 0.85rem;
@@ -249,6 +225,16 @@
             background: rgba(255,255,255,0.05);
         }
 
+        /* Estética Flash Nightlife - Conserva piel, eleva contraste */
+        .flash-photo {
+            filter: contrast(115%) saturate(85%) brightness(0.9);
+            transition: var(--transition-brutal);
+            object-fit: cover;
+        }
+        .flash-photo:hover {
+            filter: contrast(125%) saturate(110%) brightness(1);
+        }
+
         .hero-media-wrapper {
             position: relative;
             height: 75vh;
@@ -257,63 +243,32 @@
         .hero-image-frame {
             width: 100%;
             height: 100%;
-            background: url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=1200&auto=format&fit=crop') center/cover;
-            filter: grayscale(100%) contrast(125%);
-            transition: var(--transition-brutal);
+            background-image: url('https://github.com/tecnotradepty/redcasco/blob/b79bc4401effd37219ce81f19c3bea0f60d1f6f8/imagenes/file_00000000aeb481f5a222e5996e301761.png?raw=true');
+            background-size: cover;
+            background-position: center;
             border: 1px solid rgba(255,255,255,0.08);
-            position: relative;
         }
-        .hero-media-wrapper:hover .hero-image-frame {
-            filter: grayscale(20%) contrast(110%);
-        }
-        .hero-image-overlay {
-            position: absolute;
-            bottom: -2rem;
-            left: -2rem;
-            background: var(--bg-card);
-            border: 1px solid var(--red-brand);
-            padding: 1.5rem 2rem;
-            max-width: 280px;
-        }
-        .hero-image-overlay p {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-silver);
-        }
-        .hero-image-overlay strong {
-            display: block;
-            font-family: var(--font-head);
-            font-size: 1.4rem;
-            color: var(--text-main);
-            margin-top: 0.3rem;
-        }
-
-        /* === SECCIÓN EVENTOS PROMO === */
-        .section-space { padding: 10rem 0; }
+        
+        /* === SECCIÓN EVENTOS (TICKETERA DIRECTA) === */
+        .section-space { padding: 8rem 0; }
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            margin-bottom: 5rem;
+            margin-bottom: 4rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             padding-bottom: 1.5rem;
         }
         .section-title-wrap h2 {
-            font-size: clamp(2.5rem, 4vw, 4rem);
-            line-height: 1.05;
-        }
-        .section-title-wrap p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-top: 0.5rem;
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            line-height: 1.1;
         }
         .link-view-all {
             color: var(--red-brand);
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            font-weight: 600;
+            font-weight: 700;
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -324,7 +279,7 @@
         .events-promo-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 2.5rem;
+            gap: 2rem;
         }
         .promo-card {
             background: var(--bg-card);
@@ -336,21 +291,15 @@
         }
         .promo-card:hover {
             border-color: var(--red-brand);
-            transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+            transform: translateY(-5px);
         }
         .promo-thumb {
-            height: 380px;
+            height: 350px;
             background-size: cover;
             background-position: center;
-            filter: grayscale(100%) contrast(120%);
-            transition: var(--transition-brutal);
             position: relative;
         }
-        .promo-card:hover .promo-thumb {
-            filter: grayscale(0%) contrast(105%);
-            transform: scale(1.04);
-        }
+        .promo-card:hover .promo-thumb { transform: scale(1.03); }
         .promo-badge {
             position: absolute;
             top: 1.5rem; right: 1.5rem;
@@ -363,21 +312,20 @@
             text-transform: uppercase;
             letter-spacing: 1.5px;
         }
-        .promo-body {
-            padding: 2.2rem;
-        }
+        .promo-body { padding: 2rem; }
         .promo-date {
             color: var(--red-brand);
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             font-weight: 600;
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.5rem;
         }
         .promo-name {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             margin-bottom: 1rem;
             color: var(--text-main);
+            font-weight: 600;
         }
         .promo-footer {
             display: flex;
@@ -387,16 +335,7 @@
             padding-top: 1.2rem;
             border-top: 1px solid rgba(255,255,255,0.06);
         }
-        .promo-price {
-            font-size: 0.85rem;
-            color: var(--text-silver);
-        }
-        .promo-price strong {
-            color: #fff;
-            font-size: 1.1rem;
-        }
         .btn-card-action {
-            background: transparent;
             color: var(--red-brand);
             font-size: 0.8rem;
             text-transform: uppercase;
@@ -404,154 +343,79 @@
             font-weight: 700;
         }
 
-        /* === SECCIÓN GALERÍA EDITORIAL (FLASH NIGHTLIFE) === */
+        /* === GALERÍA (EUFORIA & DESEO) === */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(12, 1fr);
-            grid-auto-rows: 260px;
+            grid-auto-rows: 320px;
             gap: 1.5rem;
         }
         .gallery-item {
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.04);
             background: var(--bg-card);
         }
-        .gallery-img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            filter: grayscale(100%) contrast(130%);
-            transition: var(--transition-brutal);
-        }
-        .gallery-item:hover .gallery-img {
-            filter: grayscale(0%) contrast(110%);
-            transform: scale(1.06);
-        }
+        .gallery-img { width: 100%; height: 100%; }
+        
         .gallery-caption {
             position: absolute;
             bottom: 0; left: 0; width: 100%;
-            padding: 1.5rem;
-            background: linear-gradient(to top, rgba(8,8,8,0.9), transparent);
+            padding: 2rem 1.5rem 1.5rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
             opacity: 0;
             transition: var(--transition-smooth);
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            color: var(--text-silver);
+            color: #fff;
+            font-weight: 600;
         }
         .gallery-item:hover .gallery-caption { opacity: 1; }
 
         /* Asimetría Masonry */
-        .g-span-8 { grid-column: span 8; grid-row: span 2; }
-        .g-span-4 { grid-column: span 4; grid-row: span 1; }
-        .g-span-4-2 { grid-column: span 4; grid-row: span 2; }
-        .g-span-6 { grid-column: span 6; grid-row: span 1; }
-
-        /* === SECCIÓN VIP TEASER (EXPERIENCIA EXCLUSIVA) === */
-        .vip-teaser-block {
-            background: linear-gradient(135deg, #111 0%, #0a0a0a 100%);
-            border: 1px solid var(--red-brand);
-            padding: 6rem;
-            position: relative;
-            overflow: hidden;
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 4rem;
-            align-items: center;
-        }
-        .vip-teaser-block::before {
-            content: 'VIP';
-            position: absolute;
-            right: -2rem; bottom: -4rem;
-            font-family: var(--font-head);
-            font-size: 18rem;
-            color: rgba(215, 25, 32, 0.03);
-            pointer-events: none;
-            font-weight: 700;
-        }
-        .vip-teaser-content h3 {
-            font-size: 3.2rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
-        }
-        .vip-teaser-content p {
-            color: var(--text-silver);
-            font-size: 1.05rem;
-            margin-bottom: 2.5rem;
-            max-width: 580px;
-            font-weight: 300;
-        }
-        .vip-features-list {
-            list-style: none;
-            margin-bottom: 3rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.2rem;
-        }
-        .vip-features-list li {
-            color: var(--text-main);
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-        .vip-features-list li::before {
-            content: '■';
-            color: var(--red-brand);
-            font-size: 0.6rem;
-        }
+        .g-span-7 { grid-column: span 7; grid-row: span 2; }
+        .g-span-5 { grid-column: span 5; grid-row: span 1; }
+        .g-span-5-2 { grid-column: span 5; grid-row: span 1; }
+        .g-span-12 { grid-column: span 12; grid-row: span 2; }
 
         /* === FOOTER === */
         .footer {
-            border-top: 1px solid rgba(255,255,255,0.08);
-            padding: 6rem 0 3rem 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 5rem 0 2rem 0;
             background: #050505;
         }
         .footer-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
             gap: 4rem;
-            margin-bottom: 5rem;
+            margin-bottom: 4rem;
         }
-        .footer-brand {
-            font-family: var(--font-head);
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-        .footer-brand span { color: var(--red-brand); }
+        .footer-logo-img { height: 40px; margin-bottom: 1.5rem; opacity: 0.8;}
         .footer-desc {
             color: var(--text-muted);
             font-size: 0.85rem;
             max-width: 320px;
+            line-height: 1.6;
         }
         .footer-col-title {
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             color: var(--red-brand);
-            margin-bottom: 1.8rem;
-            font-weight: 600;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
         }
-        .footer-links {
-            list-style: none;
-        }
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-        .footer-links a {
-            color: var(--text-silver);
-            font-size: 0.85rem;
-            transition: var(--transition-smooth);
-        }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 0.8rem; }
+        .footer-links a { color: var(--text-silver); font-size: 0.85rem; transition: var(--transition-smooth); }
         .footer-links a:hover { color: #fff; }
+        
         .footer-bottom {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 2.5rem;
+            padding-top: 2rem;
             border-top: 1px solid rgba(255,255,255,0.05);
             font-size: 0.75rem;
             color: var(--text-muted);
@@ -559,27 +423,23 @@
             letter-spacing: 1px;
         }
 
-        /* === RESPONSIVE DESIGN === */
-        @media (max-width: 1200px) {
+        /* Responsive */
+        @media (max-width: 1024px) {
             .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
             .hero-media-wrapper { height: 50vh; }
             .events-promo-grid { grid-template-columns: repeat(2, 1fr); }
-            .gallery-grid { grid-template-columns: repeat(6, 1fr); }
-            .g-span-8 { grid-column: span 6; }
-            .g-span-4, .g-span-4-2 { grid-column: span 3; }
-            .vip-teaser-block { grid-template-columns: 1fr; padding: 3rem; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 250px;}
+            .g-span-7, .g-span-5, .g-span-5-2, .g-span-12 { grid-column: span 2; grid-row: span 1; }
         }
-
         @media (max-width: 768px) {
             .container { padding: 0 1.5rem; }
             .navbar { padding: 1rem 1.5rem; }
-            .nav-links { display: none; } /* En móvil se simplifica la barra */
+            .nav-links { display: none; }
             .events-promo-grid { grid-template-columns: 1fr; }
-            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-            .g-span-8, .g-span-4, .g-span-4-2, .g-span-6 { grid-column: span 2; grid-row: span 1; }
             .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
             .hero-title { font-size: 3.2rem; }
-            .vip-features-list { grid-template-columns: 1fr; }
+            .hero-ctas { flex-direction: column; align-items: flex-start; }
+            .btn-primary-red, .btn-secondary-outline { width: 100%; text-align: center; }
         }
     </style>
 </head>
@@ -587,20 +447,20 @@
 
     <nav class="navbar">
         <a href="index.html" class="nav-brand">
-            RED <span>•</span> CASCO <div class="badge-tag">PTY</div>
+            <img src="https://github.com/tecnotradepty/redcasco/blob/6cb2757b42fbf3c33b6b1d084fe620e25caaa940/imagenes/ca85f8d8-87d7-4781-9767-02d599c7c670.png?raw=true" alt="RED Casco Antiguo Logo" class="nav-brand-img">
         </a>
 
         <div class="nav-links">
             <a href="index.html" class="active">Inicio</a>
-            <a href="paginas/ticket.html">Eventos</a>
-            <a href="paginas/vip.html">VIP & Mesas</a>
-            <a href="paginas/perfil.html">Mi Perfil</a>
+            <a href="paginas/ticket.html">Tickets</a>
+            <a href="paginas/vip.html">Reservas VIP</a>
+            <a href="https://www.instagram.com/red_casco_promotor/" target="_blank">Instagram</a>
         </div>
 
         <div class="user-nav-actions">
             <a href="paginas/perfil.html" class="btn-profile-nav">
                 <span class="points-indicator"></span>
-                <span id="nav-user-points">1,450 PTS</span>
+                <span>MI PERFIL</span>
             </a>
         </div>
     </nav>
@@ -611,25 +471,20 @@
                 <div class="hero-text-content">
                     <div class="hero-tag">Casco Antiguo, Panamá</div>
                     <h1 class="hero-title">
-                        Exclusividad<br>
-                        <em>Sin Filtro.</em>
+                        Cero<br><em>Filtros.</em>
                     </h1>
                     <p class="hero-slogan">"Pórtate mal, pásalo bien."</p>
                     <p class="hero-description">
-                        El centro neurálgico de la noche en Panamá. Alta gastronomía, cultura de club, curaduría musical internacional y el trato VIP que exige tu nivel.
+                        No somos una discoteca más. Somos el epicentro de la vida nocturna de Panamá. Alta energía, gente exclusiva y la mejor música de la ciudad. Compra tu entrada o reserva tu mesa antes del Sold Out.
                     </p>
                     <div class="hero-ctas">
-                        <a href="paginas/ticket.html" class="btn-primary-red">Comprar Boletos</a>
-                        <a href="paginas/vip.html" class="btn-secondary-outline">Reservar VIP</a>
+                        <a href="paginas/ticket.html" class="btn-primary-red">Adquirir Tickets</a>
+                        <a href="paginas/vip.html" class="btn-secondary-outline">Mesas VIP</a>
                     </div>
                 </div>
 
                 <div class="hero-media-wrapper">
-                    <div class="hero-image-frame"></div>
-                    <div class="hero-image-overlay">
-                        <p>Este Fin de Semana</p>
-                        <strong>Boiler Room PTY</strong>
-                    </div>
+                    <div class="hero-image-frame flash-photo"></div>
                 </div>
             </div>
         </div>
@@ -639,53 +494,49 @@
         <div class="container">
             <div class="section-header">
                 <div class="section-title-wrap">
-                    <h2>Cartelera Destacada</h2>
-                    <p>El verdadero arranque del Casco Antiguo empieza aquí.</p>
+                    <h2>Taquilla Oficial</h2>
                 </div>
-                <a href="paginas/ticket.html" class="link-view-all">
-                    Ver Todos los Boletos &rarr;
-                </a>
+                <a href="paginas/ticket.html" class="link-view-all">Ver Calendario &rarr;</a>
             </div>
 
             <div class="events-promo-grid">
                 <a href="paginas/ticket.html" class="promo-card">
-                    <div class="promo-thumb" style="background-image: url('https://images.unsplash.com/photo-1545128485-c400e7702796?q=80&w=800&auto=format&fit=crop');">
-                        <div class="promo-badge">Sold Out Casi</div>
+                    <div class="promo-thumb flash-photo" style="background-image: url('https://github.com/tecnotradepty/redcasco/blob/b79bc4401effd37219ce81f19c3bea0f60d1f6f8/imagenes/file_0000000007c881f5a32edb68ce809fe5.png?raw=true');">
+                        <div class="promo-badge">Alta Demanda</div>
                     </div>
                     <div class="promo-body">
-                        <div class="promo-date">Sábado, 24 Octubre</div>
-                        <h3 class="promo-name">RED Residency: Boiler Room</h3>
+                        <div class="promo-date">Viernes, 28 Oct</div>
+                        <h3 class="promo-name">RED Friday Vibes</h3>
                         <div class="promo-footer">
-                            <div class="promo-price">Desde <strong>$40.00</strong></div>
-                            <span class="btn-card-action">Obtener Ticket</span>
+                            <div style="color: #fff; font-weight: 600;">Desde $30.00</div>
+                            <span class="btn-card-action">Comprar</span>
                         </div>
                     </div>
                 </a>
 
                 <a href="paginas/ticket.html" class="promo-card">
-                    <div class="promo-thumb" style="background-image: url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=800&auto=format&fit=crop');">
-                        <div class="promo-badge">Exclusivo</div>
+                    <div class="promo-thumb flash-photo" style="background-image: url('https://github.com/tecnotradepty/redcasco/blob/b79bc4401effd37219ce81f19c3bea0f60d1f6f8/imagenes/file_00000000306081f585d4d5f483e72be5.png?raw=true');">
+                        <div class="promo-badge">Main Event</div>
                     </div>
                     <div class="promo-body">
-                        <div class="promo-date">Viernes, 30 Octubre</div>
-                        <h3 class="promo-name">Halloween Noir Edition</h3>
+                        <div class="promo-date">Sábado, 29 Oct</div>
+                        <h3 class="promo-name">Saturday Night Fever</h3>
                         <div class="promo-footer">
-                            <div class="promo-price">Desde <strong>$60.00</strong></div>
-                            <span class="btn-card-action">Obtener Ticket</span>
+                            <div style="color: #fff; font-weight: 600;">Desde $40.00</div>
+                            <span class="btn-card-action">Comprar</span>
                         </div>
                     </div>
                 </a>
 
                 <a href="paginas/ticket.html" class="promo-card">
-                    <div class="promo-thumb" style="background-image: url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=800&auto=format&fit=crop');">
-                        <div class="promo-badge">Especial</div>
+                    <div class="promo-thumb flash-photo" style="background-image: url('https://github.com/tecnotradepty/redcasco/blob/b79bc4401effd37219ce81f19c3bea0f60d1f6f8/imagenes/file_000000002a7081f59c4912e73f62634f.png?raw=true');">
                     </div>
                     <div class="promo-body">
-                        <div class="promo-date">Sábado, 31 Octubre</div>
-                        <h3 class="promo-name">Midnight Society PTY</h3>
+                        <div class="promo-date">Jueves, 03 Nov</div>
+                        <h3 class="promo-name">Fiestas Patrias PTY</h3>
                         <div class="promo-footer">
-                            <div class="promo-price">Desde <strong>$35.00</strong></div>
-                            <span class="btn-card-action">Obtener Ticket</span>
+                            <div style="color: #fff; font-weight: 600;">Desde $25.00</div>
+                            <span class="btn-card-action">Comprar</span>
                         </div>
                     </div>
                 </a>
@@ -693,56 +544,34 @@
         </div>
     </section>
 
-    <section class="section-space" style="background: #050505;">
+    <section class="section-space" style="background: #040404;">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header" style="border-bottom: none; margin-bottom: 2rem;">
                 <div class="section-title-wrap">
-                    <h2>La Atmósfera</h2>
-                    <p>Cultura de moda, flash photography y alta noche panameña.</p>
+                    <h2>La Experiencia</h2>
+                    <p style="color: var(--text-muted); margin-top: 0.5rem;">Cultura de club, flash photography y la mejor gente del Casco.</p>
                 </div>
             </div>
 
             <div class="gallery-grid">
-                <div class="gallery-item g-span-8">
-                    <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1200&auto=format&fit=crop" class="gallery-img" alt="RED Gallery">
-                    <div class="gallery-caption">Main Stage & Sound Architecture</div>
+                <div class="gallery-item g-span-7">
+                    <img src="https://github.com/tecnotradepty/redcasco/blob/b79bc4401effd37219ce81f19c3bea0f60d1f6f8/imagenes/file_00000000306081f585d4d5f483e72be5.png?raw=true" class="gallery-img flash-photo" alt="RED Crowd">
+                    <div class="gallery-caption">Main Room Energy</div>
                 </div>
-                <div class="gallery-item g-span-4">
-                    <img src="https://images.unsplash.com/photo-1574169208507-84376144848b?q=80&w=800&auto=format&fit=crop" class="gallery-img" alt="RED Guests">
-                    <div class="gallery-caption">VIP Lounge Crowd</div>
+                
+                <div class="gallery-item g-span-5">
+                    <img src="https://github.com/tecnotradepty/redcasco/blob/b79bc4401effd37219ce81f19c3bea0f60d1f6f8/imagenes/file_0000000007c881f5a32edb68ce809fe5.png?raw=true" class="gallery-img flash-photo" alt="RED Guests">
+                    <div class="gallery-caption">Exclusive VIP Access</div>
                 </div>
-                <div class="gallery-item g-span-4-2">
-                    <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=800&auto=format&fit=crop" class="gallery-img" alt="RED Bottle Service">
-                    <div class="gallery-caption">Dom Pérignon Service</div>
-                </div>
-                <div class="gallery-item g-span-6">
-                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1000&auto=format&fit=crop" class="gallery-img" alt="RED Lights">
-                    <div class="gallery-caption">Red Light Protocol</div>
-                </div>
-                <div class="gallery-item g-span-4">
-                    <img src="https://images.unsplash.com/photo-1545128485-c400e7702796?q=80&w=800&auto=format&fit=crop" class="gallery-img" alt="RED DJ">
-                    <div class="gallery-caption">International Guest DJ</div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <section class="section-space">
-        <div class="container">
-            <div class="vip-teaser-block">
-                <div class="vip-teaser-content">
-                    <div class="hero-tag">Trato de PR & Servicio Personalizado</div>
-                    <h3>Eleva tu Noche al Nivel VIP</h3>
-                    <p>
-                        Asegura tu espacio en la zona privilegiada de la discoteca. Mapa dinámico de mesas, selección de botellas premium y mesero dedicado sin filas.
-                    </p>
-                    <ul class="vip-features-list">
-                        <li>Mapeo de Mesas Interactivo</li>
-                        <li>Bottle Service Digital</li>
-                        <li>Acceso Fast-Pass Garantizado</li>
-                        <li>Atención Directa de PR</li>
-                    </ul>
-                    <a href="paginas/vip.html" class="btn-primary-red">Reservar Mesa VIP</a>
+                <div class="gallery-item g-span-5-2">
+                    <img src="https://github.com/tecnotradepty/redcasco/blob/b79bc4401effd37219ce81f19c3bea0f60d1f6f8/imagenes/file_00000000a558820cbe446bd735415308.png?raw=true" class="gallery-img flash-photo" alt="RED Lighting">
+                    <div class="gallery-caption">Unfiltered Nights</div>
+                </div>
+
+                <div class="gallery-item g-span-12">
+                    <img src="https://github.com/tecnotradepty/redcasco/blob/b79bc4401effd37219ce81f19c3bea0f60d1f6f8/imagenes/file_000000002a7081f59c4912e73f62634f.png?raw=true" class="gallery-img flash-photo" alt="RED Atmosphere">
+                    <div class="gallery-caption">The true Casco Antiguo Experience</div>
                 </div>
             </div>
         </div>
@@ -752,41 +581,39 @@
         <div class="container">
             <div class="footer-grid">
                 <div>
-                    <div class="footer-brand">RED <span>CASCO</span></div>
+                    <img src="https://github.com/tecnotradepty/redcasco/blob/6cb2757b42fbf3c33b6b1d084fe620e25caaa940/imagenes/ca85f8d8-87d7-4781-9767-02d599c7c670.png?raw=true" alt="RED Casco Antiguo" class="footer-logo-img">
                     <p class="footer-desc">
-                        La experiencia nocturna definitiva de Panamá. Calle 9na, Casco Antiguo, Ciudad de Panamá.
+                        El verdadero arranque del Casco Antiguo. High energy, trato exclusivo. Calle 9na, Panamá.
                     </p>
                 </div>
                 <div>
-                    <div class="footer-col-title">Navegación</div>
+                    <div class="footer-col-title">Acceso</div>
                     <ul class="footer-links">
-                        <li><a href="index.html">Inicio</a></li>
-                        <li><a href="paginas/ticket.html">Boletos & Eventos</a></li>
-                        <li><a href="paginas/vip.html">Reservas VIP</a></li>
-                        <li><a href="paginas/perfil.html">Perfil & Puntos</a></li>
+                        <li><a href="paginas/ticket.html">Comprar Entradas</a></li>
+                        <li><a href="paginas/vip.html">Bottle Service</a></li>
+                        <li><a href="paginas/perfil.html">Mi Taquilla</a></li>
                     </ul>
                 </div>
                 <div>
-                    <div class="footer-col-title">Atención VIP</div>
+                    <div class="footer-col-title">Social</div>
                     <ul class="footer-links">
+                        <li><a href="https://www.instagram.com/red_casco_promotor/" target="_blank">Instagram</a></li>
                         <li><a href="https://wa.me/50760000000" target="_blank">WhatsApp PR</a></li>
-                        <li><a href="#">Dress Code Policy</a></li>
-                        <li><a href="#">Términos de Entrada</a></li>
                     </ul>
                 </div>
                 <div>
                     <div class="footer-col-title">Horario</div>
                     <p style="color: var(--text-silver); font-size: 0.85rem; line-height: 1.8;">
                         Jueves a Sábado<br>
-                        10:00 PM – 4:00 AM<br>
-                        Casco Antiguo, PTY
+                        10:00 PM – Late<br>
+                        Dress to impress.
                     </p>
                 </div>
             </div>
 
             <div class="footer-bottom">
-                <div>&copy; 2026 RED CASCO ANTIGUO. TODOS LOS DERECHOS RESERVADOS.</div>
-                <div>DISEÑADO POR DISK CREATIVO</div>
+                <div>&copy; 2026 RED CASCO ANTIGUO. ALL RIGHTS RESERVED.</div>
+                <div>CODE BY DISK CREATIVO</div>
             </div>
         </div>
     </footer>
