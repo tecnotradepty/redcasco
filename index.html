@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RED Casco Antiguo | The Night Starts Here</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* === TOKENS Y VARIABLES === */
+        :root {
+            --bg-base: #080808;
+            --bg-card: #111111;
+            --bg-panel: #161616;
+            --text-main: #F5F5F5;
+            --text-muted: #777777;
+            --red-brand: #D71920;
+            --red-glow: rgba(215, 25, 32, 0.15);
+            --font-head: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+            --grid-gap: 2rem;
+            --transition-brutal: all 0.5s cubic-bezier(0.87, 0, 0.13, 1);
+        }
+
+        /* === RESET Y BASE === */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+        
+        /* Efecto de iluminación arquitectónica roja de fondo */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%; left: -50%;
+            width: 200vw; height: 200vh;
+            background: radial-gradient(circle at 50% 30%, var(--red-glow) 0%, transparent 40%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 400; }
+        a { text-decoration: none; color: inherit; }
+        button { cursor: pointer; border: none; font-family: var(--font-body); transition: var(--transition-brutal); }
+
+        /* === GRID SYSTEM === */
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 4rem;
+        }
+
+        /* === NAVEGACIÓN === */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(8, 8, 8, 0.8);
+            backdrop-filter: blur(12px);
+            z-index: 100;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .nav-brand { font-family: var(--font-head); font-size: 1.5rem; letter-spacing: 2px; color: var(--red-brand); }
+        .nav-links { display: flex; gap: 3rem; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); }
+        .nav-links a:hover { color: var(--text-main); }
+        
+        /* Módulo de Perfil / Puntos */
+        .user-module {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .points-badge {
+            background: transparent;
+            border: 1px solid var(--red-brand);
+            color: var(--red-brand);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+        .profile-btn {
+            background: var(--text-main);
+            color: var(--bg-base);
+            padding: 0.5rem 1.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+        .profile-btn:hover { background: var(--red-brand); color: var(--text-main); }
+
+        /* === HERO SECTION === */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            width: 100%;
+        }
+        .hero-title {
+            font-size: clamp(4rem, 8vw, 8rem);
+            line-height: 0.9;
+            text-transform: uppercase;
+        }
+        .hero-title span { color: var(--red-brand); font-style: italic; }
+        .hero-desc {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-top: 2rem;
+            max-width: 400px;
+        }
+        .hero-image {
+            height: 70vh;
+            background: url('https://images.unsplash.com/photo-1574169208507-84376144848b?q=80&w=1000&auto=format&fit=crop') center/cover;
+            filter: grayscale(100%) contrast(120%);
+            transition: var(--transition-brutal);
+        }
+        .hero-image:hover { filter: grayscale(0%) contrast(110%); }
+
+        /* === TICKETERA (EVENTOS) === */
+        .section-padding { padding: 8rem 0; }
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 4rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 1rem;
+        }
+        .section-title { font-size: 3rem; color: var(--text-main); }
+        
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        .event-card {
+            background: var(--bg-card);
+            border: 1px solid transparent;
+            transition: var(--transition-brutal);
+            position: relative;
+            overflow: hidden;
+        }
+        .event-card:hover { border-color: var(--red-brand); transform: translateY(-5px); }
+        .event-img {
+            height: 300px;
+            background-color: #1a1a1a;
+            background-position: center;
+            background-size: cover;
+            filter: grayscale(100%);
+            transition: var(--transition-brutal);
+        }
+        .event-card:hover .event-img { filter: grayscale(50%) tint(var(--red-brand)); transform: scale(1.05); }
+        .event-info { padding: 2rem; }
+        .event-date { color: var(--red-brand); font-size: 0.85rem; text-transform: uppercase; font-weight: 600; letter-spacing: 1px; margin-bottom: 0.5rem; }
+        .event-name { font-family: var(--font-head); font-size: 1.8rem; margin-bottom: 1rem; }
+        .event-price { display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); font-size: 0.9rem; }
+        .btn-buy {
+            background: transparent;
+            border: 1px solid var(--text-main);
+            color: var(--text-main);
+            padding: 0.5rem 1.5rem;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+        }
+        .btn-buy:hover { background: var(--red-brand); border-color: var(--red-brand); }
+
+        /* === BOTTLE SERVICE (COMANDAS A LA MESA) === */
+        .bottles-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+        .bottle-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: var(--transition-brutal);
+        }
+        .bottle-card:hover { border-color: rgba(255,255,255,0.2); }
+        .bottle-mock {
+            width: 60px; height: 180px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.1), transparent);
+            margin: 0 auto 2rem;
+            border-radius: 5px 5px 20px 20px;
+            position: relative;
+        }
+        .bottle-mock::after {
+            content: ''; position: absolute; top: 0; left: 20px; width: 20px; height: 40px; background: var(--red-brand);
+        }
+        .bottle-name { font-size: 1.2rem; margin-bottom: 0.5rem; font-family: var(--font-head); }
+        .bottle-price { color: var(--red-brand); font-family: var(--font-body); font-weight: 600; margin-bottom: 1.5rem; }
+        .btn-add {
+            width: 100%; padding: 1rem;
+            background: #1a1a1a; color: var(--text-main);
+            text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px;
+        }
+        .btn-add:hover { background: var(--text-main); color: var(--bg-base); }
+
+        /* === PANEL OFF-CANVAS (CARRITO / COMANDA) === */
+        .panel-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(5px);
+            z-index: 999; opacity: 0; pointer-events: none;
+            transition: var(--transition-brutal);
+        }
+        .panel-overlay.active { opacity: 1; pointer-events: auto; }
+        
+        .side-panel {
+            position: fixed; top: 0; right: -500px;
+            width: 450px; height: 100vh;
+            background: var(--bg-panel);
+            z-index: 1000;
+            padding: 3rem;
+            display: flex; flex-direction: column;
+            border-left: 1px solid var(--red-brand);
+            transition: var(--transition-brutal);
+        }
+        .side-panel.active { right: 0; }
+        
+        .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;}
+        .panel-title { font-family: var(--font-head); font-size: 1.5rem; }
+        .btn-close { background: transparent; color: var(--text-muted); font-size: 1.5rem; }
+        
+        .order-list { flex-grow: 1; overflow-y: auto; }
+        .order-item { display: flex; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .order-item-name { font-size: 1rem; }
+        .order-item-price { color: var(--red-brand); }
+        
+        .panel-footer { margin-top: 2rem; }
+        .total-row { display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 600; margin-bottom: 1.5rem; }
+        .btn-checkout { width: 100%; background: var(--red-brand); color: white; padding: 1.2rem; font-size: 1rem; text-transform: uppercase; font-weight: 600; letter-spacing: 2px;}
+
+        /* Responsive básico */
+        @media (max-width: 1024px) {
+            .hero-content { grid-template-columns: 1fr; text-align: center; }
+            .hero-image { display: none; }
+            .events-grid { grid-template-columns: 1fr; }
+            .bottles-grid { grid-template-columns: repeat(2, 1fr); }
+            .side-panel { width: 100%; right: -100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-brand">RED</div>
+        <div class="nav-links">
+            <a href="#eventos">Eventos</a>
+            <a href="#bottle-service">Bottle Service</a>
+            <a href="#galeria">Galería</a>
+        </div>
+        <div class="user-module">
+            <div class="points-badge" id="user-points">PUNTOS: 1,450</div>
+            <button class="profile-btn" onclick="togglePanel('perfil')">Perfil VIP</button>
+            <button class="profile-btn" style="background: transparent; border: 1px solid var(--text-main); color: var(--text-main);" onclick="togglePanel('comanda')">Comanda (0)</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="hero">
+            <div class="hero-content">
+                <div>
+                    <h1 class="hero-title">The Night<br><span>Starts Here.</span></h1>
+                    <p class="hero-desc">Arquitectura sonora y hospitalidad de alto nivel en el corazón del Casco Antiguo.</p>
+                </div>
+                <div class="hero-image"></div>
+            </div>
+        </header>
+
+        <section id="eventos" class="section-padding">
+            <div class="section-header">
+                <h2 class="section-title">Próximos Eventos</h2>
+            </div>
+            <div class="events-grid">
+                <article class="event-card">
+                    <div class="event-img" style="background-image: url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=800&auto=format&fit=crop');"></div>
+                    <div class="event-info">
+                        <div class="event-date">Sábado, 24 Octubre</div>
+                        <h3 class="event-name">Boiler Room Edition</h3>
+                        <div class="event-price">
+                            <span>Fase 1: $40.00</span>
+                            <button class="btn-buy" onclick="buyTicket('Boiler Room', 40)">Comprar</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="event-card">
+                    <div class="event-img" style="background-image: url('https://images.unsplash.com/photo-1545128485-c400e7702796?q=80&w=800&auto=format&fit=crop');"></div>
+                    <div class="event-info">
+                        <div class="event-date">Viernes, 30 Octubre</div>
+                        <h3 class="event-name">Halloween Noir</h3>
+                        <div class="event-price">
+                            <span>VIP Pass: $80.00</span>
+                            <button class="btn-buy" onclick="buyTicket('Halloween Noir', 80)">Comprar</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="event-card">
+                    <div class="event-img" style="background-image: url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=800&auto=format&fit=crop');"></div>
+                    <div class="event-info">
+                        <div class="event-date">Sábado, 31 Octubre</div>
+                        <h3 class="event-name">RED Resident DJ</h3>
+                        <div class="event-price">
+                            <span>General: $25.00</span>
+                            <button class="btn-buy" onclick="buyTicket('Resident DJ', 25)">Comprar</button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="bottle-service" class="section-padding">
+            <div class="section-header">
+                <h2 class="section-title">Bottle Service</h2>
+                <p style="color: var(--text-muted);">Pide desde tu mesa. Sin esperas.</p>
+            </div>
+            <div class="bottles-grid">
+                <div class="bottle-card">
+                    <div class="bottle-mock"></div>
+                    <h3 class="bottle-name">Dom Pérignon Luminous</h3>
+                    <div class="bottle-price">$450.00</div>
+                    <button class="btn-add" onclick="addBottle('Dom Pérignon', 450)">Agregar a Mesa</button>
+                </div>
+                <div class="bottle-card">
+                    <div class="bottle-mock" style="background: linear-gradient(to bottom, rgba(215,25,32,0.2), transparent);"></div>
+                    <h3 class="bottle-name">Don Julio 1942</h3>
+                    <div class="bottle-price">$380.00</div>
+                    <button class="btn-add" onclick="addBottle('Don Julio 1942', 380)">Agregar a Mesa</button>
+                </div>
+                <div class="bottle-card">
+                    <div class="bottle-mock"></div>
+                    <h3 class="bottle-name">Grey Goose Magnum</h3>
+                    <div class="bottle-price">$250.00</div>
+                    <button class="btn-add" onclick="addBottle('Grey Goose', 250)">Agregar a Mesa</button>
+                </div>
+                <div class="bottle-card">
+                    <div class="bottle-mock"></div>
+                    <h3 class="bottle-name">Moët & Chandon Nectar</h3>
+                    <div class="bottle-price">$200.00</div>
+                    <button class="btn-add" onclick="addBottle('Moët Nectar', 200)">Agregar a Mesa</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="panel-overlay" id="overlay" onclick="closePanels()"></div>
+    
+    <aside class="side-panel" id="panel-comanda">
+        <div class="panel-header">
+            <h2 class="panel-title">Tu Comanda (Mesa A3)</h2>
+            <button class="btn-close" onclick="closePanels()">×</button>
+        </div>
+        <div class="order-list" id="order-list">
+            <p style="color: var(--text-muted); text-align: center; margin-top: 2rem;">Aún no has pedido nada.</p>
+        </div>
+        <div class="panel-footer">
+            <div class="total-row">
+                <span>Total Estimado:</span>
+                <span id="order-total" style="color: var(--red-brand);">$0.00</span>
+            </div>
+            <button class="btn-checkout" onclick="sendOrder()">Solicitar al Mesero</button>
+        </div>
+    </aside>
+
+    <script>
+        // ESTADO DE LA APLICACIÓN
+        const AppState = {
+            userPoints: 1450,
+            comanda: [],
+            tableId: 'MESA A3'
+        };
+
+        // DOM Elements
+        const overlay = document.getElementById('overlay');
+        const panelComanda = document.getElementById('panel-comanda');
+        const orderList = document.getElementById('order-list');
+        const orderTotal = document.getElementById('order-total');
+        const pointsBadge = document.getElementById('user-points');
+
+        // FUNCIONES DE UI (Off-canvas)
+        function togglePanel(type) {
+            overlay.classList.add('active');
+            if (type === 'comanda') {
+                panelComanda.classList.add('active');
+            } else if (type === 'perfil') {
+                alert(`Perfil VIP\nMesa Actual: ${AppState.tableId}\nPuntos Canjeables: ${AppState.userPoints}\n(Este módulo abriría un dashboard de usuario)`);
+                closePanels();
+            }
+        }
+
+        function closePanels() {
+            overlay.classList.remove('active');
+            panelComanda.classList.remove('active');
+        }
+
+        // LÓGICA DE NEGOCIO: Ticketera y Puntos
+        function buyTicket(eventName, price) {
+            // Simulador de compra y ganancia de puntos
+            const earnedPoints = Math.floor(price * 1.5); // Regla de negocio: 1.5 puntos por dolar
+            AppState.userPoints += earnedPoints;
+            
+            alert(`Ticket para ${eventName} adquirido con éxito.\nHas ganado ${earnedPoints} puntos RED.`);
+            updateUI();
+        }
+
+        // LÓGICA DE NEGOCIO: Bottle Service (Comandas)
+        function addBottle(name, price) {
+            AppState.comanda.push({ name, price });
+            updateUI();
+            togglePanel('comanda');
+        }
+
+        function sendOrder() {
+            if (AppState.comanda.length === 0) {
+                alert("Tu comanda está vacía.");
+                return;
+            }
+            // Aquí iría el Fetch/XHR al Panel Administrativo
+            alert(`Orden enviada a la ${AppState.tableId}. El mesero está en camino.`);
+            AppState.comanda = []; // Limpiar carrito
+            updateUI();
+            closePanels();
+        }
+
+        // MOTOR DE RENDERIZADO
+        function updateUI() {
+            // Actualizar Puntos
+            pointsBadge.innerText = `PUNTOS: ${AppState.userPoints.toLocaleString()}`;
+            
+            // Actualizar Comanda
+            if (AppState.comanda.length === 0) {
+                orderList.innerHTML = '<p style="color: var(--text-muted); text-align: center; margin-top: 2rem;">Aún no has pedido nada.</p>';
+                orderTotal.innerText = '$0.00';
+            } else {
+                let html = '';
+                let total = 0;
+                AppState.comanda.forEach(item => {
+                    html += `
+                    <div class="order-item">
+                        <span class="order-item-name">${item.name}</span>
+                        <span class="order-item-price">$${item.price.toFixed(2)}</span>
+                    </div>`;
+                    total += item.price;
+                });
+                orderList.innerHTML = html;
+                orderTotal.innerText = `$${total.toFixed(2)}`;
+            }
+            
+            // Actualizar Botón Navbar
+            document.querySelector('.user-module button:last-child').innerText = `Comanda (${AppState.comanda.length})`;
+        }
+    </script>
+</body>
+</html>
+
