@@ -3,469 +3,793 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RED Casco Antiguo | The Night Starts Here</title>
+    <title>RED Casco Antiguo | Pórtate Mal, Pásalo Bien</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <style>
-        /* === TOKENS Y VARIABLES === */
+        /* === TOKENS DE DISEÑO - DISK CREATIVO OS === */
         :root {
             --bg-base: #080808;
             --bg-card: #111111;
-            --bg-panel: #161616;
+            --bg-glass: rgba(17, 17, 17, 0.75);
             --text-main: #F5F5F5;
             --text-muted: #777777;
+            --text-silver: #B8B8B8;
             --red-brand: #D71920;
-            --red-glow: rgba(215, 25, 32, 0.15);
+            --red-glow: rgba(215, 25, 32, 0.18);
             --font-head: 'Playfair Display', serif;
             --font-body: 'Inter', sans-serif;
-            --grid-gap: 2rem;
+            --max-width: 1600px;
+            --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             --transition-brutal: all 0.5s cubic-bezier(0.87, 0, 0.13, 1);
         }
 
-        /* === RESET Y BASE === */
+        /* === RESET & BASE === */
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
             background-color: var(--bg-base);
             color: var(--text-main);
             font-family: var(--font-body);
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
+            line-height: 1.5;
         }
-        
-        /* Efecto de iluminación arquitectónica roja de fondo */
+
+        /* Ambiente cinemático de iluminación roja */
         body::before {
             content: '';
             position: fixed;
-            top: -50%; left: -50%;
-            width: 200vw; height: 200vh;
-            background: radial-gradient(circle at 50% 30%, var(--red-glow) 0%, transparent 40%);
+            top: -30%; left: -20%;
+            width: 140vw; height: 140vh;
+            background: radial-gradient(circle at 50% 20%, var(--red-glow) 0%, transparent 55%);
             z-index: -1;
             pointer-events: none;
         }
 
-        h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 400; }
+        h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 400; letter-spacing: -0.02em; }
         a { text-decoration: none; color: inherit; }
-        button { cursor: pointer; border: none; font-family: var(--font-body); transition: var(--transition-brutal); }
+        button { cursor: pointer; border: none; font-family: var(--font-body); transition: var(--transition-smooth); }
 
-        /* === GRID SYSTEM === */
         .container {
-            max-width: 1600px;
+            max-width: var(--max-width);
             margin: 0 auto;
             padding: 0 4rem;
         }
 
-        /* === NAVEGACIÓN === */
+        /* === BARRA SUPERIOR (NAVBAR) === */
         .navbar {
             position: fixed;
             top: 0; left: 0; width: 100%;
-            padding: 1.5rem 4rem;
+            padding: 1.25rem 4rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(8, 8, 8, 0.8);
-            backdrop-filter: blur(12px);
-            z-index: 100;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            background: rgba(8, 8, 8, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         }
-        .nav-brand { font-family: var(--font-head); font-size: 1.5rem; letter-spacing: 2px; color: var(--red-brand); }
-        .nav-links { display: flex; gap: 3rem; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); }
-        .nav-links a:hover { color: var(--text-main); }
-        
-        /* Módulo de Perfil / Puntos */
-        .user-module {
+        .nav-brand {
+            font-family: var(--font-head);
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .nav-brand span { color: var(--red-brand); }
+        .nav-brand .badge-tag {
+            font-family: var(--font-body);
+            font-size: 0.6rem;
+            letter-spacing: 1px;
+            background: var(--red-brand);
+            color: #fff;
+            padding: 2px 6px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3.5rem;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+        .nav-links a {
+            color: var(--text-silver);
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition-smooth);
+        }
+        .nav-links a.active, .nav-links a:hover {
+            color: var(--text-main);
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0%; height: 2px;
+            background: var(--red-brand);
+            transition: var(--transition-smooth);
+        }
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .user-nav-actions {
             display: flex;
             align-items: center;
             gap: 1.5rem;
         }
-        .points-badge {
+        .btn-profile-nav {
             background: transparent;
-            border: 1px solid var(--red-brand);
-            color: var(--red-brand);
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-        }
-        .profile-btn {
-            background: var(--text-main);
-            color: var(--bg-base);
-            padding: 0.5rem 1.5rem;
-            font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: var(--text-main);
+            padding: 0.6rem 1.4rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            font-size: 0.8rem;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
         }
-        .profile-btn:hover { background: var(--red-brand); color: var(--text-main); }
+        .btn-profile-nav:hover {
+            border-color: var(--red-brand);
+            background: var(--red-brand);
+            color: #fff;
+            box-shadow: 0 0 25px var(--red-glow);
+        }
+        .points-indicator {
+            width: 8px; height: 8px;
+            background: var(--red-brand);
+            border-radius: 50%;
+            display: inline-block;
+        }
 
         /* === HERO SECTION === */
         .hero {
-            height: 100vh;
+            min-height: 100vh;
+            padding-top: 8rem;
             display: flex;
             align-items: center;
             position: relative;
         }
-        .hero-content {
+        .hero-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 5rem;
             align-items: center;
             width: 100%;
         }
+        .hero-tag {
+            color: var(--red-brand);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .hero-tag::before {
+            content: '';
+            width: 30px; height: 1px;
+            background: var(--red-brand);
+        }
         .hero-title {
-            font-size: clamp(4rem, 8vw, 8rem);
-            line-height: 0.9;
+            font-size: clamp(3.8rem, 6.5vw, 7.5rem);
+            line-height: 0.95;
+            margin-bottom: 2rem;
             text-transform: uppercase;
         }
-        .hero-title span { color: var(--red-brand); font-style: italic; }
-        .hero-desc {
-            font-size: 1.2rem;
+        .hero-title em {
+            font-style: italic;
+            font-family: var(--font-head);
+            color: var(--red-brand);
+            font-weight: 400;
+        }
+        .hero-slogan {
+            font-size: 1.5rem;
+            font-family: var(--font-head);
+            color: var(--text-silver);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            border-left: 2px solid var(--red-brand);
+            padding-left: 1rem;
+        }
+        .hero-description {
             color: var(--text-muted);
-            margin-top: 2rem;
-            max-width: 400px;
+            font-size: 1rem;
+            max-width: 520px;
+            margin-bottom: 3rem;
+            font-weight: 300;
         }
-        .hero-image {
-            height: 70vh;
-            background: url('https://images.unsplash.com/photo-1574169208507-84376144848b?q=80&w=1000&auto=format&fit=crop') center/cover;
-            filter: grayscale(100%) contrast(120%);
-            transition: var(--transition-brutal);
+        .hero-ctas {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
         }
-        .hero-image:hover { filter: grayscale(0%) contrast(110%); }
+        .btn-primary-red {
+            background: var(--red-brand);
+            color: #fff;
+            padding: 1.2rem 2.8rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            display: inline-block;
+        }
+        .btn-primary-red:hover {
+            background: #f01e26;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(215, 25, 32, 0.4);
+        }
+        .btn-secondary-outline {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.25);
+            color: var(--text-main);
+            padding: 1.2rem 2.5rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            display: inline-block;
+        }
+        .btn-secondary-outline:hover {
+            border-color: var(--text-main);
+            background: rgba(255,255,255,0.05);
+        }
 
-        /* === TICKETERA (EVENTOS) === */
-        .section-padding { padding: 8rem 0; }
+        .hero-media-wrapper {
+            position: relative;
+            height: 75vh;
+            width: 100%;
+        }
+        .hero-image-frame {
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=1200&auto=format&fit=crop') center/cover;
+            filter: grayscale(100%) contrast(125%);
+            transition: var(--transition-brutal);
+            border: 1px solid rgba(255,255,255,0.08);
+            position: relative;
+        }
+        .hero-media-wrapper:hover .hero-image-frame {
+            filter: grayscale(20%) contrast(110%);
+        }
+        .hero-image-overlay {
+            position: absolute;
+            bottom: -2rem;
+            left: -2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--red-brand);
+            padding: 1.5rem 2rem;
+            max-width: 280px;
+        }
+        .hero-image-overlay p {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-silver);
+        }
+        .hero-image-overlay strong {
+            display: block;
+            font-family: var(--font-head);
+            font-size: 1.4rem;
+            color: var(--text-main);
+            margin-top: 0.3rem;
+        }
+
+        /* === SECCIÓN EVENTOS PROMO === */
+        .section-space { padding: 10rem 0; }
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            margin-bottom: 4rem;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 1rem;
+            margin-bottom: 5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 1.5rem;
         }
-        .section-title { font-size: 3rem; color: var(--text-main); }
-        
-        .events-grid {
+        .section-title-wrap h2 {
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            line-height: 1.05;
+        }
+        .section-title-wrap p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+        }
+        .link-view-all {
+            color: var(--red-brand);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition-smooth);
+        }
+        .link-view-all:hover { gap: 1rem; color: #fff; }
+
+        .events-promo-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
+            gap: 2.5rem;
         }
-        .event-card {
+        .promo-card {
             background: var(--bg-card);
-            border: 1px solid transparent;
-            transition: var(--transition-brutal);
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: var(--transition-smooth);
+            display: block;
             position: relative;
             overflow: hidden;
         }
-        .event-card:hover { border-color: var(--red-brand); transform: translateY(-5px); }
-        .event-img {
-            height: 300px;
-            background-color: #1a1a1a;
-            background-position: center;
+        .promo-card:hover {
+            border-color: var(--red-brand);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+        }
+        .promo-thumb {
+            height: 380px;
             background-size: cover;
-            filter: grayscale(100%);
+            background-position: center;
+            filter: grayscale(100%) contrast(120%);
             transition: var(--transition-brutal);
-        }
-        .event-card:hover .event-img { filter: grayscale(50%) tint(var(--red-brand)); transform: scale(1.05); }
-        .event-info { padding: 2rem; }
-        .event-date { color: var(--red-brand); font-size: 0.85rem; text-transform: uppercase; font-weight: 600; letter-spacing: 1px; margin-bottom: 0.5rem; }
-        .event-name { font-family: var(--font-head); font-size: 1.8rem; margin-bottom: 1rem; }
-        .event-price { display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); font-size: 0.9rem; }
-        .btn-buy {
-            background: transparent;
-            border: 1px solid var(--text-main);
-            color: var(--text-main);
-            padding: 0.5rem 1.5rem;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 1px;
-        }
-        .btn-buy:hover { background: var(--red-brand); border-color: var(--red-brand); }
-
-        /* === BOTTLE SERVICE (COMANDAS A LA MESA) === */
-        .bottles-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-        }
-        .bottle-card {
-            background: var(--bg-card);
-            padding: 2rem;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: var(--transition-brutal);
-        }
-        .bottle-card:hover { border-color: rgba(255,255,255,0.2); }
-        .bottle-mock {
-            width: 60px; height: 180px;
-            background: linear-gradient(to bottom, rgba(255,255,255,0.1), transparent);
-            margin: 0 auto 2rem;
-            border-radius: 5px 5px 20px 20px;
             position: relative;
         }
-        .bottle-mock::after {
-            content: ''; position: absolute; top: 0; left: 20px; width: 20px; height: 40px; background: var(--red-brand);
+        .promo-card:hover .promo-thumb {
+            filter: grayscale(0%) contrast(105%);
+            transform: scale(1.04);
         }
-        .bottle-name { font-size: 1.2rem; margin-bottom: 0.5rem; font-family: var(--font-head); }
-        .bottle-price { color: var(--red-brand); font-family: var(--font-body); font-weight: 600; margin-bottom: 1.5rem; }
-        .btn-add {
-            width: 100%; padding: 1rem;
-            background: #1a1a1a; color: var(--text-main);
-            text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px;
+        .promo-badge {
+            position: absolute;
+            top: 1.5rem; right: 1.5rem;
+            background: var(--bg-base);
+            border: 1px solid var(--red-brand);
+            color: var(--red-brand);
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.4rem 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
         }
-        .btn-add:hover { background: var(--text-main); color: var(--bg-base); }
+        .promo-body {
+            padding: 2.2rem;
+        }
+        .promo-date {
+            color: var(--red-brand);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+        }
+        .promo-name {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+        .promo-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+        .promo-price {
+            font-size: 0.85rem;
+            color: var(--text-silver);
+        }
+        .promo-price strong {
+            color: #fff;
+            font-size: 1.1rem;
+        }
+        .btn-card-action {
+            background: transparent;
+            color: var(--red-brand);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+        }
 
-        /* === PANEL OFF-CANVAS (CARRITO / COMANDA) === */
-        .panel-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8); backdrop-filter: blur(5px);
-            z-index: 999; opacity: 0; pointer-events: none;
+        /* === SECCIÓN GALERÍA EDITORIAL (FLASH NIGHTLIFE) === */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-auto-rows: 260px;
+            gap: 1.5rem;
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+            background: var(--bg-card);
+        }
+        .gallery-img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(130%);
             transition: var(--transition-brutal);
         }
-        .panel-overlay.active { opacity: 1; pointer-events: auto; }
-        
-        .side-panel {
-            position: fixed; top: 0; right: -500px;
-            width: 450px; height: 100vh;
-            background: var(--bg-panel);
-            z-index: 1000;
-            padding: 3rem;
-            display: flex; flex-direction: column;
-            border-left: 1px solid var(--red-brand);
-            transition: var(--transition-brutal);
+        .gallery-item:hover .gallery-img {
+            filter: grayscale(0%) contrast(110%);
+            transform: scale(1.06);
         }
-        .side-panel.active { right: 0; }
-        
-        .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;}
-        .panel-title { font-family: var(--font-head); font-size: 1.5rem; }
-        .btn-close { background: transparent; color: var(--text-muted); font-size: 1.5rem; }
-        
-        .order-list { flex-grow: 1; overflow-y: auto; }
-        .order-item { display: flex; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .order-item-name { font-size: 1rem; }
-        .order-item-price { color: var(--red-brand); }
-        
-        .panel-footer { margin-top: 2rem; }
-        .total-row { display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 600; margin-bottom: 1.5rem; }
-        .btn-checkout { width: 100%; background: var(--red-brand); color: white; padding: 1.2rem; font-size: 1rem; text-transform: uppercase; font-weight: 600; letter-spacing: 2px;}
+        .gallery-caption {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%;
+            padding: 1.5rem;
+            background: linear-gradient(to top, rgba(8,8,8,0.9), transparent);
+            opacity: 0;
+            transition: var(--transition-smooth);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-silver);
+        }
+        .gallery-item:hover .gallery-caption { opacity: 1; }
 
-        /* Responsive básico */
-        @media (max-width: 1024px) {
-            .hero-content { grid-template-columns: 1fr; text-align: center; }
-            .hero-image { display: none; }
-            .events-grid { grid-template-columns: 1fr; }
-            .bottles-grid { grid-template-columns: repeat(2, 1fr); }
-            .side-panel { width: 100%; right: -100%; }
+        /* Asimetría Masonry */
+        .g-span-8 { grid-column: span 8; grid-row: span 2; }
+        .g-span-4 { grid-column: span 4; grid-row: span 1; }
+        .g-span-4-2 { grid-column: span 4; grid-row: span 2; }
+        .g-span-6 { grid-column: span 6; grid-row: span 1; }
+
+        /* === SECCIÓN VIP TEASER (EXPERIENCIA EXCLUSIVA) === */
+        .vip-teaser-block {
+            background: linear-gradient(135deg, #111 0%, #0a0a0a 100%);
+            border: 1px solid var(--red-brand);
+            padding: 6rem;
+            position: relative;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .vip-teaser-block::before {
+            content: 'VIP';
+            position: absolute;
+            right: -2rem; bottom: -4rem;
+            font-family: var(--font-head);
+            font-size: 18rem;
+            color: rgba(215, 25, 32, 0.03);
+            pointer-events: none;
+            font-weight: 700;
+        }
+        .vip-teaser-content h3 {
+            font-size: 3.2rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+        .vip-teaser-content p {
+            color: var(--text-silver);
+            font-size: 1.05rem;
+            margin-bottom: 2.5rem;
+            max-width: 580px;
+            font-weight: 300;
+        }
+        .vip-features-list {
+            list-style: none;
+            margin-bottom: 3rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+        }
+        .vip-features-list li {
+            color: var(--text-main);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .vip-features-list li::before {
+            content: '■';
+            color: var(--red-brand);
+            font-size: 0.6rem;
+        }
+
+        /* === FOOTER === */
+        .footer {
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding: 6rem 0 3rem 0;
+            background: #050505;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 4rem;
+            margin-bottom: 5rem;
+        }
+        .footer-brand {
+            font-family: var(--font-head);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .footer-brand span { color: var(--red-brand); }
+        .footer-desc {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            max-width: 320px;
+        }
+        .footer-col-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--red-brand);
+            margin-bottom: 1.8rem;
+            font-weight: 600;
+        }
+        .footer-links {
+            list-style: none;
+        }
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        .footer-links a {
+            color: var(--text-silver);
+            font-size: 0.85rem;
+            transition: var(--transition-smooth);
+        }
+        .footer-links a:hover { color: #fff; }
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2.5rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* === RESPONSIVE DESIGN === */
+        @media (max-width: 1200px) {
+            .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .hero-media-wrapper { height: 50vh; }
+            .events-promo-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid { grid-template-columns: repeat(6, 1fr); }
+            .g-span-8 { grid-column: span 6; }
+            .g-span-4, .g-span-4-2 { grid-column: span 3; }
+            .vip-teaser-block { grid-template-columns: 1fr; padding: 3rem; }
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 1.5rem; }
+            .navbar { padding: 1rem 1.5rem; }
+            .nav-links { display: none; } /* En móvil se simplifica la barra */
+            .events-promo-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .g-span-8, .g-span-4, .g-span-4-2, .g-span-6 { grid-column: span 2; grid-row: span 1; }
+            .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .hero-title { font-size: 3.2rem; }
+            .vip-features-list { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
-        <div class="nav-brand">RED</div>
+        <a href="index.html" class="nav-brand">
+            RED <span>•</span> CASCO <div class="badge-tag">PTY</div>
+        </a>
+
         <div class="nav-links">
-            <a href="#eventos">Eventos</a>
-            <a href="#bottle-service">Bottle Service</a>
-            <a href="#galeria">Galería</a>
+            <a href="index.html" class="active">Inicio</a>
+            <a href="paginas/ticket.html">Eventos</a>
+            <a href="paginas/vip.html">VIP & Mesas</a>
+            <a href="paginas/perfil.html">Mi Perfil</a>
         </div>
-        <div class="user-module">
-            <div class="points-badge" id="user-points">PUNTOS: 1,450</div>
-            <button class="profile-btn" onclick="togglePanel('perfil')">Perfil VIP</button>
-            <button class="profile-btn" style="background: transparent; border: 1px solid var(--text-main); color: var(--text-main);" onclick="togglePanel('comanda')">Comanda (0)</button>
+
+        <div class="user-nav-actions">
+            <a href="paginas/perfil.html" class="btn-profile-nav">
+                <span class="points-indicator"></span>
+                <span id="nav-user-points">1,450 PTS</span>
+            </a>
         </div>
     </nav>
 
-    <div class="container">
-        <header class="hero">
-            <div class="hero-content">
+    <header class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-text-content">
+                    <div class="hero-tag">Casco Antiguo, Panamá</div>
+                    <h1 class="hero-title">
+                        Exclusividad<br>
+                        <em>Sin Filtro.</em>
+                    </h1>
+                    <p class="hero-slogan">"Pórtate mal, pásalo bien."</p>
+                    <p class="hero-description">
+                        El centro neurálgico de la noche en Panamá. Alta gastronomía, cultura de club, curaduría musical internacional y el trato VIP que exige tu nivel.
+                    </p>
+                    <div class="hero-ctas">
+                        <a href="paginas/ticket.html" class="btn-primary-red">Comprar Boletos</a>
+                        <a href="paginas/vip.html" class="btn-secondary-outline">Reservar VIP</a>
+                    </div>
+                </div>
+
+                <div class="hero-media-wrapper">
+                    <div class="hero-image-frame"></div>
+                    <div class="hero-image-overlay">
+                        <p>Este Fin de Semana</p>
+                        <strong>Boiler Room PTY</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="section-space">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-title-wrap">
+                    <h2>Cartelera Destacada</h2>
+                    <p>El verdadero arranque del Casco Antiguo empieza aquí.</p>
+                </div>
+                <a href="paginas/ticket.html" class="link-view-all">
+                    Ver Todos los Boletos &rarr;
+                </a>
+            </div>
+
+            <div class="events-promo-grid">
+                <a href="paginas/ticket.html" class="promo-card">
+                    <div class="promo-thumb" style="background-image: url('https://images.unsplash.com/photo-1545128485-c400e7702796?q=80&w=800&auto=format&fit=crop');">
+                        <div class="promo-badge">Sold Out Casi</div>
+                    </div>
+                    <div class="promo-body">
+                        <div class="promo-date">Sábado, 24 Octubre</div>
+                        <h3 class="promo-name">RED Residency: Boiler Room</h3>
+                        <div class="promo-footer">
+                            <div class="promo-price">Desde <strong>$40.00</strong></div>
+                            <span class="btn-card-action">Obtener Ticket</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="paginas/ticket.html" class="promo-card">
+                    <div class="promo-thumb" style="background-image: url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=800&auto=format&fit=crop');">
+                        <div class="promo-badge">Exclusivo</div>
+                    </div>
+                    <div class="promo-body">
+                        <div class="promo-date">Viernes, 30 Octubre</div>
+                        <h3 class="promo-name">Halloween Noir Edition</h3>
+                        <div class="promo-footer">
+                            <div class="promo-price">Desde <strong>$60.00</strong></div>
+                            <span class="btn-card-action">Obtener Ticket</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="paginas/ticket.html" class="promo-card">
+                    <div class="promo-thumb" style="background-image: url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=800&auto=format&fit=crop');">
+                        <div class="promo-badge">Especial</div>
+                    </div>
+                    <div class="promo-body">
+                        <div class="promo-date">Sábado, 31 Octubre</div>
+                        <h3 class="promo-name">Midnight Society PTY</h3>
+                        <div class="promo-footer">
+                            <div class="promo-price">Desde <strong>$35.00</strong></div>
+                            <span class="btn-card-action">Obtener Ticket</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-space" style="background: #050505;">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-title-wrap">
+                    <h2>La Atmósfera</h2>
+                    <p>Cultura de moda, flash photography y alta noche panameña.</p>
+                </div>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item g-span-8">
+                    <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1200&auto=format&fit=crop" class="gallery-img" alt="RED Gallery">
+                    <div class="gallery-caption">Main Stage & Sound Architecture</div>
+                </div>
+                <div class="gallery-item g-span-4">
+                    <img src="https://images.unsplash.com/photo-1574169208507-84376144848b?q=80&w=800&auto=format&fit=crop" class="gallery-img" alt="RED Guests">
+                    <div class="gallery-caption">VIP Lounge Crowd</div>
+                </div>
+                <div class="gallery-item g-span-4-2">
+                    <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=800&auto=format&fit=crop" class="gallery-img" alt="RED Bottle Service">
+                    <div class="gallery-caption">Dom Pérignon Service</div>
+                </div>
+                <div class="gallery-item g-span-6">
+                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1000&auto=format&fit=crop" class="gallery-img" alt="RED Lights">
+                    <div class="gallery-caption">Red Light Protocol</div>
+                </div>
+                <div class="gallery-item g-span-4">
+                    <img src="https://images.unsplash.com/photo-1545128485-c400e7702796?q=80&w=800&auto=format&fit=crop" class="gallery-img" alt="RED DJ">
+                    <div class="gallery-caption">International Guest DJ</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-space">
+        <div class="container">
+            <div class="vip-teaser-block">
+                <div class="vip-teaser-content">
+                    <div class="hero-tag">Trato de PR & Servicio Personalizado</div>
+                    <h3>Eleva tu Noche al Nivel VIP</h3>
+                    <p>
+                        Asegura tu espacio en la zona privilegiada de la discoteca. Mapa dinámico de mesas, selección de botellas premium y mesero dedicado sin filas.
+                    </p>
+                    <ul class="vip-features-list">
+                        <li>Mapeo de Mesas Interactivo</li>
+                        <li>Bottle Service Digital</li>
+                        <li>Acceso Fast-Pass Garantizado</li>
+                        <li>Atención Directa de PR</li>
+                    </ul>
+                    <a href="paginas/vip.html" class="btn-primary-red">Reservar Mesa VIP</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
                 <div>
-                    <h1 class="hero-title">The Night<br><span>Starts Here.</span></h1>
-                    <p class="hero-desc">Arquitectura sonora y hospitalidad de alto nivel en el corazón del Casco Antiguo.</p>
+                    <div class="footer-brand">RED <span>CASCO</span></div>
+                    <p class="footer-desc">
+                        La experiencia nocturna definitiva de Panamá. Calle 9na, Casco Antiguo, Ciudad de Panamá.
+                    </p>
                 </div>
-                <div class="hero-image"></div>
+                <div>
+                    <div class="footer-col-title">Navegación</div>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="paginas/ticket.html">Boletos & Eventos</a></li>
+                        <li><a href="paginas/vip.html">Reservas VIP</a></li>
+                        <li><a href="paginas/perfil.html">Perfil & Puntos</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer-col-title">Atención VIP</div>
+                    <ul class="footer-links">
+                        <li><a href="https://wa.me/50760000000" target="_blank">WhatsApp PR</a></li>
+                        <li><a href="#">Dress Code Policy</a></li>
+                        <li><a href="#">Términos de Entrada</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer-col-title">Horario</div>
+                    <p style="color: var(--text-silver); font-size: 0.85rem; line-height: 1.8;">
+                        Jueves a Sábado<br>
+                        10:00 PM – 4:00 AM<br>
+                        Casco Antiguo, PTY
+                    </p>
+                </div>
             </div>
-        </header>
 
-        <section id="eventos" class="section-padding">
-            <div class="section-header">
-                <h2 class="section-title">Próximos Eventos</h2>
+            <div class="footer-bottom">
+                <div>&copy; 2026 RED CASCO ANTIGUO. TODOS LOS DERECHOS RESERVADOS.</div>
+                <div>DISEÑADO POR DISK CREATIVO</div>
             </div>
-            <div class="events-grid">
-                <article class="event-card">
-                    <div class="event-img" style="background-image: url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=800&auto=format&fit=crop');"></div>
-                    <div class="event-info">
-                        <div class="event-date">Sábado, 24 Octubre</div>
-                        <h3 class="event-name">Boiler Room Edition</h3>
-                        <div class="event-price">
-                            <span>Fase 1: $40.00</span>
-                            <button class="btn-buy" onclick="buyTicket('Boiler Room', 40)">Comprar</button>
-                        </div>
-                    </div>
-                </article>
-                <article class="event-card">
-                    <div class="event-img" style="background-image: url('https://images.unsplash.com/photo-1545128485-c400e7702796?q=80&w=800&auto=format&fit=crop');"></div>
-                    <div class="event-info">
-                        <div class="event-date">Viernes, 30 Octubre</div>
-                        <h3 class="event-name">Halloween Noir</h3>
-                        <div class="event-price">
-                            <span>VIP Pass: $80.00</span>
-                            <button class="btn-buy" onclick="buyTicket('Halloween Noir', 80)">Comprar</button>
-                        </div>
-                    </div>
-                </article>
-                <article class="event-card">
-                    <div class="event-img" style="background-image: url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=800&auto=format&fit=crop');"></div>
-                    <div class="event-info">
-                        <div class="event-date">Sábado, 31 Octubre</div>
-                        <h3 class="event-name">RED Resident DJ</h3>
-                        <div class="event-price">
-                            <span>General: $25.00</span>
-                            <button class="btn-buy" onclick="buyTicket('Resident DJ', 25)">Comprar</button>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <section id="bottle-service" class="section-padding">
-            <div class="section-header">
-                <h2 class="section-title">Bottle Service</h2>
-                <p style="color: var(--text-muted);">Pide desde tu mesa. Sin esperas.</p>
-            </div>
-            <div class="bottles-grid">
-                <div class="bottle-card">
-                    <div class="bottle-mock"></div>
-                    <h3 class="bottle-name">Dom Pérignon Luminous</h3>
-                    <div class="bottle-price">$450.00</div>
-                    <button class="btn-add" onclick="addBottle('Dom Pérignon', 450)">Agregar a Mesa</button>
-                </div>
-                <div class="bottle-card">
-                    <div class="bottle-mock" style="background: linear-gradient(to bottom, rgba(215,25,32,0.2), transparent);"></div>
-                    <h3 class="bottle-name">Don Julio 1942</h3>
-                    <div class="bottle-price">$380.00</div>
-                    <button class="btn-add" onclick="addBottle('Don Julio 1942', 380)">Agregar a Mesa</button>
-                </div>
-                <div class="bottle-card">
-                    <div class="bottle-mock"></div>
-                    <h3 class="bottle-name">Grey Goose Magnum</h3>
-                    <div class="bottle-price">$250.00</div>
-                    <button class="btn-add" onclick="addBottle('Grey Goose', 250)">Agregar a Mesa</button>
-                </div>
-                <div class="bottle-card">
-                    <div class="bottle-mock"></div>
-                    <h3 class="bottle-name">Moët & Chandon Nectar</h3>
-                    <div class="bottle-price">$200.00</div>
-                    <button class="btn-add" onclick="addBottle('Moët Nectar', 200)">Agregar a Mesa</button>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <div class="panel-overlay" id="overlay" onclick="closePanels()"></div>
-    
-    <aside class="side-panel" id="panel-comanda">
-        <div class="panel-header">
-            <h2 class="panel-title">Tu Comanda (Mesa A3)</h2>
-            <button class="btn-close" onclick="closePanels()">×</button>
         </div>
-        <div class="order-list" id="order-list">
-            <p style="color: var(--text-muted); text-align: center; margin-top: 2rem;">Aún no has pedido nada.</p>
-        </div>
-        <div class="panel-footer">
-            <div class="total-row">
-                <span>Total Estimado:</span>
-                <span id="order-total" style="color: var(--red-brand);">$0.00</span>
-            </div>
-            <button class="btn-checkout" onclick="sendOrder()">Solicitar al Mesero</button>
-        </div>
-    </aside>
+    </footer>
 
-    <script>
-        // ESTADO DE LA APLICACIÓN
-        const AppState = {
-            userPoints: 1450,
-            comanda: [],
-            tableId: 'MESA A3'
-        };
-
-        // DOM Elements
-        const overlay = document.getElementById('overlay');
-        const panelComanda = document.getElementById('panel-comanda');
-        const orderList = document.getElementById('order-list');
-        const orderTotal = document.getElementById('order-total');
-        const pointsBadge = document.getElementById('user-points');
-
-        // FUNCIONES DE UI (Off-canvas)
-        function togglePanel(type) {
-            overlay.classList.add('active');
-            if (type === 'comanda') {
-                panelComanda.classList.add('active');
-            } else if (type === 'perfil') {
-                alert(`Perfil VIP\nMesa Actual: ${AppState.tableId}\nPuntos Canjeables: ${AppState.userPoints}\n(Este módulo abriría un dashboard de usuario)`);
-                closePanels();
-            }
-        }
-
-        function closePanels() {
-            overlay.classList.remove('active');
-            panelComanda.classList.remove('active');
-        }
-
-        // LÓGICA DE NEGOCIO: Ticketera y Puntos
-        function buyTicket(eventName, price) {
-            // Simulador de compra y ganancia de puntos
-            const earnedPoints = Math.floor(price * 1.5); // Regla de negocio: 1.5 puntos por dolar
-            AppState.userPoints += earnedPoints;
-            
-            alert(`Ticket para ${eventName} adquirido con éxito.\nHas ganado ${earnedPoints} puntos RED.`);
-            updateUI();
-        }
-
-        // LÓGICA DE NEGOCIO: Bottle Service (Comandas)
-        function addBottle(name, price) {
-            AppState.comanda.push({ name, price });
-            updateUI();
-            togglePanel('comanda');
-        }
-
-        function sendOrder() {
-            if (AppState.comanda.length === 0) {
-                alert("Tu comanda está vacía.");
-                return;
-            }
-            // Aquí iría el Fetch/XHR al Panel Administrativo
-            alert(`Orden enviada a la ${AppState.tableId}. El mesero está en camino.`);
-            AppState.comanda = []; // Limpiar carrito
-            updateUI();
-            closePanels();
-        }
-
-        // MOTOR DE RENDERIZADO
-        function updateUI() {
-            // Actualizar Puntos
-            pointsBadge.innerText = `PUNTOS: ${AppState.userPoints.toLocaleString()}`;
-            
-            // Actualizar Comanda
-            if (AppState.comanda.length === 0) {
-                orderList.innerHTML = '<p style="color: var(--text-muted); text-align: center; margin-top: 2rem;">Aún no has pedido nada.</p>';
-                orderTotal.innerText = '$0.00';
-            } else {
-                let html = '';
-                let total = 0;
-                AppState.comanda.forEach(item => {
-                    html += `
-                    <div class="order-item">
-                        <span class="order-item-name">${item.name}</span>
-                        <span class="order-item-price">$${item.price.toFixed(2)}</span>
-                    </div>`;
-                    total += item.price;
-                });
-                orderList.innerHTML = html;
-                orderTotal.innerText = `$${total.toFixed(2)}`;
-            }
-            
-            // Actualizar Botón Navbar
-            document.querySelector('.user-module button:last-child').innerText = `Comanda (${AppState.comanda.length})`;
-        }
-    </script>
 </body>
 </html>
-
