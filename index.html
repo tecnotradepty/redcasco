@@ -10,19 +10,22 @@
     <style>
         /* === TOKENS DE DISEÑO - DISK CREATIVO OS === */
         :root {
-            --bg-base: #080808;
+            --bg-base: #050505; /* Negro más profundo tipo plantilla */
             --bg-card: #111111;
-            --bg-glass: rgba(17, 17, 17, 0.75);
+            --border-thin: rgba(255, 255, 255, 0.08);
             --text-main: #F5F5F5;
             --text-muted: #888888;
             --text-silver: #B8B8B8;
             --red-brand: #D71920;
-            --red-glow: rgba(215, 25, 32, 0.12);
+            --red-glow: rgba(215, 25, 32, 0.15);
             --font-head: 'Playfair Display', serif;
             --font-body: 'Inter', sans-serif;
             --max-width: 1600px;
             --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            --transition-brutal: all 0.5s cubic-bezier(0.87, 0, 0.13, 1);
+            --transition-brutal: all 0.6s cubic-bezier(0.87, 0, 0.13, 1);
+            /* Espaciado fluido */
+            --fluid-gap: clamp(1.5rem, 4vw, 3rem);
+            --section-pad: clamp(5rem, 10vw, 10rem);
         }
 
         /* === RESET & BASE === */
@@ -37,51 +40,52 @@
             line-height: 1.5;
         }
 
+        /* Iluminación base (Club Vibe) */
         body::before {
             content: '';
             position: fixed;
             top: -20%; left: -10%;
             width: 120vw; height: 120vh;
-            background: radial-gradient(circle at 50% 20%, var(--red-glow) 0%, transparent 60%);
+            background: radial-gradient(circle at 50% 20%, var(--red-glow) 0%, transparent 50%);
             z-index: -1;
             pointer-events: none;
         }
 
         h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 400; letter-spacing: -0.02em; }
         a { text-decoration: none; color: inherit; }
-        button { cursor: pointer; border: none; font-family: var(--font-body); transition: var(--transition-smooth); }
+        button { cursor: pointer; border: none; font-family: var(--font-body); transition: var(--transition-smooth); background: transparent; }
 
         .container {
             max-width: var(--max-width);
             margin: 0 auto;
-            padding: 0 4rem;
+            padding: 0 clamp(1.5rem, 5vw, 4rem);
         }
 
-        /* === NAVBAR === */
+        /* === NAVBAR EDITORIAL === */
         .navbar {
             position: fixed;
             top: 0; left: 0; width: 100%;
-            padding: 1.2rem 4rem;
+            padding: 1.2rem clamp(1.5rem, 5vw, 4rem);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(8, 8, 8, 0.9);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            border-bottom: 1px solid var(--border-thin);
         }
         
         .nav-brand-img {
-            height: 35px;
+            height: 32px;
             width: auto;
             display: block;
         }
 
         .nav-links {
             display: flex;
-            gap: 3.5rem;
-            font-size: 0.8rem;
+            gap: 3rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             font-weight: 500;
@@ -96,7 +100,7 @@
         .nav-links a::after {
             content: ''; position: absolute;
             bottom: 0; left: 0;
-            width: 0%; height: 2px;
+            width: 0%; height: 1px;
             background: var(--red-brand);
             transition: var(--transition-smooth);
         }
@@ -105,306 +109,345 @@
         .user-nav-actions {
             display: flex;
             align-items: center;
-            gap: 1.5rem;
         }
         .btn-profile-nav {
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.15);
+            border: 1px solid var(--border-thin);
             color: var(--text-main);
             padding: 0.6rem 1.4rem;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             font-weight: 600;
             display: flex;
             align-items: center;
             gap: 0.6rem;
+            transition: var(--transition-smooth);
         }
         .btn-profile-nav:hover {
             border-color: var(--red-brand);
-            background: var(--red-brand);
+            background: rgba(215, 25, 32, 0.05);
         }
         .points-indicator {
-            width: 8px; height: 8px;
+            width: 6px; height: 6px;
             background: var(--red-brand);
             border-radius: 50%;
             display: inline-block;
+            box-shadow: 0 0 8px var(--red-brand);
         }
 
-        /* === HERO SECTION === */
+        /* === HERO SECTION INMERSIVO === */
         .hero {
             min-height: 100vh;
-            padding-top: 6rem;
+            padding-top: 8rem;
+            padding-bottom: 4rem;
             display: flex;
             align-items: center;
             position: relative;
         }
         .hero-grid {
             display: grid;
-            grid-template-columns: 1fr 1.1fr;
-            gap: 4rem;
+            grid-template-columns: 1fr 1.2fr;
+            gap: var(--fluid-gap);
             align-items: center;
             width: 100%;
         }
+        .hero-text-content { position: relative; z-index: 2; }
+        
         .hero-tag {
             color: var(--red-brand);
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 3px;
-            font-weight: 600;
+            font-weight: 700;
             margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
-            gap: 0.8rem;
+            gap: 1rem;
         }
-        .hero-tag::before {
-            content: ''; width: 30px; height: 1px; background: var(--red-brand);
-        }
+        .hero-tag::before { content: ''; width: 40px; height: 1px; background: var(--red-brand); }
+        
         .hero-title {
-            font-size: clamp(3.2rem, 5.5vw, 6.5rem);
-            line-height: 0.95;
+            font-size: clamp(3.5rem, 7vw, 7.5rem);
+            line-height: 0.9;
             margin-bottom: 1.5rem;
             text-transform: uppercase;
+            letter-spacing: -0.03em;
         }
         .hero-title em {
             font-style: italic;
             font-family: var(--font-head);
             color: var(--red-brand);
             font-weight: 400;
+            display: block;
         }
         .hero-slogan {
-            font-size: 1.4rem;
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
             font-family: var(--font-head);
             color: var(--text-main);
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             font-style: italic;
             border-left: 2px solid var(--red-brand);
-            padding-left: 1rem;
+            padding-left: 1.2rem;
         }
-        .hero-description {
-            color: var(--text-silver);
-            font-size: 1.05rem;
-            max-width: 480px;
-            margin-bottom: 3rem;
-            font-weight: 300;
-            line-height: 1.6;
-        }
+        
         .hero-ctas {
             display: flex;
-            gap: 1.2rem;
+            gap: 1rem;
             align-items: center;
+            flex-wrap: wrap;
         }
         .btn-primary-red {
             background: var(--red-brand);
             color: #fff;
-            padding: 1.2rem 2.8rem;
-            font-size: 0.85rem;
+            padding: 1.2rem 2.5rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             font-weight: 700;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
-        .btn-primary-red:hover {
-            background: #f01e26;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(215, 25, 32, 0.4);
-        }
+        .btn-primary-red:hover { background: #f01e26; transform: translateY(-2px); box-shadow: 0 10px 25px var(--red-glow); }
+        
         .btn-secondary-outline {
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid var(--border-thin);
             color: var(--text-main);
             padding: 1.2rem 2.5rem;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             font-weight: 600;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
-        .btn-secondary-outline:hover {
-            border-color: var(--text-main);
-            background: rgba(255,255,255,0.05);
-        }
+        .btn-secondary-outline:hover { border-color: var(--text-main); background: rgba(255,255,255,0.03); }
 
-        /* Estética Flash Nightlife - Conserva piel, eleva contraste */
-        .flash-photo {
-            filter: contrast(115%) saturate(85%) brightness(0.9);
-            transition: var(--transition-brutal);
-            object-fit: cover;
-        }
-        .flash-photo:hover {
-            filter: contrast(125%) saturate(110%) brightness(1);
-        }
-
+        /* Estética Flash Editorial */
         .hero-media-wrapper {
             position: relative;
-            height: 75vh;
+            height: clamp(500px, 70vh, 800px);
             width: 100%;
+            overflow: hidden;
+            border: 1px solid var(--border-thin);
         }
         .hero-image-frame {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             background-image: url('https://github.com/tecnotradepty/redcasco/blob/b79bc4401effd37219ce81f19c3bea0f60d1f6f8/imagenes/file_00000000aeb481f5a222e5996e301761.png?raw=true');
             background-size: cover;
             background-position: center;
-            border: 1px solid rgba(255,255,255,0.08);
+            filter: contrast(120%) saturate(85%) brightness(0.85);
+            transition: var(--transition-brutal);
         }
+        .hero-media-wrapper:hover .hero-image-frame { transform: scale(1.05); filter: contrast(110%) saturate(100%) brightness(1); }
         
-        /* === SECCIÓN EVENTOS (TICKETERA DIRECTA) === */
-        .section-space { padding: 8rem 0; }
+        /* === EVENTOS / TICKETERA (CARDS ESTILO PLANTILLA) === */
+        .section-space { padding: var(--section-pad) 0; }
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            margin-bottom: 4rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: clamp(3rem, 5vw, 5rem);
+            border-bottom: 1px solid var(--border-thin);
             padding-bottom: 1.5rem;
         }
         .section-title-wrap h2 {
-            font-size: clamp(2.5rem, 4vw, 3.5rem);
-            line-height: 1.1;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1;
         }
         .link-view-all {
             color: var(--red-brand);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             font-weight: 700;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            transition: var(--transition-smooth);
         }
         .link-view-all:hover { gap: 1rem; color: #fff; }
 
         .events-promo-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--fluid-gap);
         }
+        
+        /* Diseño de Tarjeta Ultra Premium */
         .promo-card {
             background: var(--bg-card);
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: var(--transition-smooth);
+            border: 1px solid var(--border-thin);
             display: block;
             position: relative;
             overflow: hidden;
+            transition: var(--transition-smooth);
         }
-        .promo-card:hover {
-            border-color: var(--red-brand);
-            transform: translateY(-5px);
-        }
+        .promo-card:hover { border-color: var(--red-brand); transform: translateY(-4px); box-shadow: 0 15px 40px rgba(0,0,0,0.8); }
+        
         .promo-thumb {
-            height: 350px;
+            height: clamp(250px, 30vh, 350px);
             background-size: cover;
             background-position: center;
             position: relative;
+            overflow: hidden;
         }
-        .promo-card:hover .promo-thumb { transform: scale(1.03); }
+        /* Efecto viñeta fotográfica interior */
+        .promo-thumb::after {
+            content: ''; position: absolute; inset: 0;
+            box-shadow: inset 0 0 60px rgba(0,0,0,0.6);
+            transition: opacity 0.4s;
+        }
+        .promo-card:hover .promo-thumb::after { opacity: 0; }
+        .promo-thumb-img {
+            width: 100%; height: 100%;
+            background-size: cover; background-position: center;
+            filter: contrast(120%) saturate(80%);
+            transition: var(--transition-brutal);
+        }
+        .promo-card:hover .promo-thumb-img { transform: scale(1.08); filter: contrast(110%) saturate(110%); }
+
         .promo-badge {
             position: absolute;
-            top: 1.5rem; right: 1.5rem;
+            top: 1.2rem; right: 1.2rem;
             background: var(--bg-base);
             border: 1px solid var(--red-brand);
             color: var(--red-brand);
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 700;
-            padding: 0.4rem 0.8rem;
+            padding: 0.3rem 0.8rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
+            z-index: 2;
         }
-        .promo-body { padding: 2rem; }
+        
+        .promo-body { padding: 2rem; position: relative; }
         .promo-date {
             color: var(--red-brand);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             font-weight: 600;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
         }
         .promo-name {
-            font-size: 1.6rem;
-            margin-bottom: 1rem;
+            font-size: clamp(1.4rem, 2vw, 1.8rem);
+            margin-bottom: 1.5rem;
             color: var(--text-main);
-            font-weight: 600;
+            font-family: var(--font-head);
+            line-height: 1.1;
         }
         .promo-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 1.5rem;
-            padding-top: 1.2rem;
-            border-top: 1px solid rgba(255,255,255,0.06);
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-thin);
         }
+        .promo-price { font-size: 0.85rem; color: var(--text-silver); }
+        .promo-price strong { color: #fff; font-size: 1.1rem; }
         .btn-card-action {
             color: var(--red-brand);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             font-weight: 700;
         }
 
-        /* === GALERÍA (EUFORIA & DESEO) === */
+        /* === GALERÍA MASONRY VISCERAL === */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(12, 1fr);
-            grid-auto-rows: 320px;
-            gap: 1.5rem;
+            grid-auto-rows: clamp(150px, 20vw, 280px);
+            gap: clamp(1rem, 2vw, 1.5rem);
         }
         .gallery-item {
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.04);
+            border: 1px solid var(--border-thin);
             background: var(--bg-card);
         }
-        .gallery-img { width: 100%; height: 100%; }
+        .gallery-img { 
+            width: 100%; height: 100%; object-fit: cover;
+            filter: contrast(115%) saturate(85%);
+            transition: var(--transition-brutal);
+        }
+        .gallery-item:hover .gallery-img { transform: scale(1.04); filter: contrast(120%) saturate(100%); }
         
         .gallery-caption {
             position: absolute;
             bottom: 0; left: 0; width: 100%;
-            padding: 2rem 1.5rem 1.5rem;
+            padding: 2rem 1.5rem 1.2rem;
             background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-            opacity: 0;
+            opacity: 0; transform: translateY(10px);
             transition: var(--transition-smooth);
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #fff;
+            letter-spacing: 2px;
             font-weight: 600;
         }
-        .gallery-item:hover .gallery-caption { opacity: 1; }
+        .gallery-item:hover .gallery-caption { opacity: 1; transform: translateY(0); }
 
-        /* Asimetría Masonry */
+        /* Clases de Layout Asimétrico (Masonry) */
         .g-span-7 { grid-column: span 7; grid-row: span 2; }
         .g-span-5 { grid-column: span 5; grid-row: span 1; }
         .g-span-5-2 { grid-column: span 5; grid-row: span 1; }
         .g-span-12 { grid-column: span 12; grid-row: span 2; }
 
+        /* === TEASER MESA VIP (MINI PLANO) === */
+        .vip-teaser-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border-thin);
+            padding: clamp(3rem, 6vw, 6rem);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--fluid-gap);
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .vip-teaser-block::after {
+            content: 'VIP'; position: absolute;
+            right: -2rem; bottom: -5rem;
+            font-family: var(--font-head); font-size: 20rem;
+            color: rgba(255,255,255,0.02); pointer-events: none;
+        }
+        
+        .mock-map {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            padding: 2rem;
+            border: 1px solid var(--border-thin);
+            background: var(--bg-base);
+        }
+        .mock-table {
+            height: 60px;
+            border: 1px solid #333;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.7rem; color: #555;
+            transition: var(--transition-smooth);
+        }
+        .mock-table.available { border-color: var(--red-brand); color: var(--red-brand); background: rgba(215,25,32,0.05); }
+        .mock-table.available:hover { background: var(--red-brand); color: #fff; cursor: pointer; }
+
         /* === FOOTER === */
         .footer {
-            border-top: 1px solid rgba(255,255,255,0.05);
-            padding: 5rem 0 2rem 0;
-            background: #050505;
+            border-top: 1px solid var(--border-thin);
+            padding: 6rem 0 2rem 0;
+            background: var(--bg-base);
         }
         .footer-grid {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 4rem;
-            margin-bottom: 4rem;
+            gap: var(--fluid-gap);
+            margin-bottom: 5rem;
         }
-        .footer-logo-img { height: 40px; margin-bottom: 1.5rem; opacity: 0.8;}
-        .footer-desc {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            max-width: 320px;
-            line-height: 1.6;
-        }
+        .footer-logo-img { height: 35px; margin-bottom: 1.5rem; }
+        .footer-desc { color: var(--text-muted); font-size: 0.85rem; max-width: 320px; line-height: 1.6; }
         .footer-col-title {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--red-brand);
-            margin-bottom: 1.5rem;
-            font-weight: 700;
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px;
+            color: var(--red-brand); margin-bottom: 1.5rem; font-weight: 700;
         }
         .footer-links { list-style: none; }
         .footer-links li { margin-bottom: 0.8rem; }
@@ -412,34 +455,29 @@
         .footer-links a:hover { color: #fff; }
         
         .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding-top: 2rem; border-top: 1px solid var(--border-thin);
+            font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;
         }
 
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
-            .hero-media-wrapper { height: 50vh; }
-            .events-promo-grid { grid-template-columns: repeat(2, 1fr); }
-            .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 250px;}
-            .g-span-7, .g-span-5, .g-span-5-2, .g-span-12 { grid-column: span 2; grid-row: span 1; }
+        /* Responsive Architecture (Mobile First Adjustments) */
+        @media (max-width: 992px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .hero-tag { justify-content: center; }
+            .hero-tag::before { display: none; }
+            .hero-slogan { border-left: none; padding-left: 0; }
+            .hero-ctas { justify-content: center; }
+            .vip-teaser-block { grid-template-columns: 1fr; text-align: center; }
+            .mock-map { max-width: 400px; margin: 0 auto; }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 768px) {
-            .container { padding: 0 1.5rem; }
-            .navbar { padding: 1rem 1.5rem; }
             .nav-links { display: none; }
-            .events-promo-grid { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-            .hero-title { font-size: 3.2rem; }
-            .hero-ctas { flex-direction: column; align-items: flex-start; }
-            .btn-primary-red, .btn-secondary-outline { width: 100%; text-align: center; }
+            .gallery-grid { grid-template-columns: 1fr; grid-auto-rows: 250px;}
+            .g-span-7, .g-span-5, .g-span-5-2, .g-span-12 { grid-column: span 1; grid-row: span 1; }
+            .footer-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+            .btn-primary-red, .btn-secondary-outline { width: 100%; }
         }
     </style>
 </head>
@@ -453,14 +491,14 @@
         <div class="nav-links">
             <a href="index.html" class="active">Inicio</a>
             <a href="paginas/ticket.html">Tickets</a>
-            <a href="paginas/vip.html">Reservas VIP</a>
+            <a href="paginas/vip.html">Mesas VIP</a>
             <a href="https://www.instagram.com/red_casco_promotor/" target="_blank">Instagram</a>
         </div>
 
         <div class="user-nav-actions">
             <a href="paginas/perfil.html" class="btn-profile-nav">
                 <span class="points-indicator"></span>
-                <span>MI PERFIL</span>
+                <span>Mi Perfil</span>
             </a>
         </div>
     </nav>
@@ -469,22 +507,22 @@
         <div class="container">
             <div class="hero-grid">
                 <div class="hero-text-content">
-                    <div class="hero-tag">Casco Antiguo, Panamá</div>
+                    <div class="hero-tag">Casco Antiguo, PTY</div>
                     <h1 class="hero-title">
                         Cero<br><em>Filtros.</em>
                     </h1>
                     <p class="hero-slogan">"Pórtate mal, pásalo bien."</p>
-                    <p class="hero-description">
-                        No somos una discoteca más. Somos el epicentro de la vida nocturna de Panamá. Alta energía, gente exclusiva y la mejor música de la ciudad. Compra tu entrada o reserva tu mesa antes del Sold Out.
+                    <p class="hero-description" style="color: var(--text-silver); margin-bottom: 2.5rem; font-weight: 300; line-height: 1.6; max-width: 450px;">
+                        No somos una discoteca genérica. Somos el epicentro de la vida nocturna de Panamá. Alta energía, gente exclusiva y curaduría musical internacional.
                     </p>
                     <div class="hero-ctas">
-                        <a href="paginas/ticket.html" class="btn-primary-red">Adquirir Tickets</a>
-                        <a href="paginas/vip.html" class="btn-secondary-outline">Mesas VIP</a>
+                        <a href="paginas/ticket.html" class="btn-primary-red">Taquilla Digital</a>
+                        <a href="paginas/vip.html" class="btn-secondary-outline">Trato de PR (VIP)</a>
                     </div>
                 </div>
 
                 <div class="hero-media-wrapper">
-                    <div class="hero-image-frame flash-photo"></div>
+                    <div class="hero-image-frame"></div>
                 </div>
             </div>
         </div>
@@ -494,49 +532,52 @@
         <div class="container">
             <div class="section-header">
                 <div class="section-title-wrap">
-                    <h2>Taquilla Oficial</h2>
+                    <h2>Cartelera</h2>
                 </div>
-                <a href="paginas/ticket.html" class="link-view-all">Ver Calendario &rarr;</a>
+                <a href="paginas/ticket.html" class="link-view-all">Ver Calendario Completo &rarr;</a>
             </div>
 
             <div class="events-promo-grid">
                 <a href="paginas/ticket.html" class="promo-card">
-                    <div class="promo-thumb flash-photo" style="background-image: url('https://github.com/tecnotradepty/redcasco/blob/b79bc4401effd37219ce81f19c3bea0f60d1f6f8/imagenes/file_0000000007c881f5a32edb68ce809fe5.png?raw=true');">
+                    <div class="promo-thumb">
                         <div class="promo-badge">Alta Demanda</div>
+                        <div class="promo-thumb-img" style="background-image: url('https://github.com/tecnotradepty/redcasco/blob/b79bc4401effd37219ce81f19c3bea0f60d1f6f8/imagenes/file_0000000007c881f5a32edb68ce809fe5.png?raw=true');"></div>
                     </div>
                     <div class="promo-body">
                         <div class="promo-date">Viernes, 28 Oct</div>
                         <h3 class="promo-name">RED Friday Vibes</h3>
                         <div class="promo-footer">
-                            <div style="color: #fff; font-weight: 600;">Desde $30.00</div>
-                            <span class="btn-card-action">Comprar</span>
+                            <div class="promo-price">Tickets desde <strong>$30.00</strong></div>
+                            <span class="btn-card-action">Adquirir</span>
                         </div>
                     </div>
                 </a>
 
                 <a href="paginas/ticket.html" class="promo-card">
-                    <div class="promo-thumb flash-photo" style="background-image: url('https://github.com/tecnotradepty/redcasco/blob/b79bc4401effd37219ce81f19c3bea0f60d1f6f8/imagenes/file_00000000306081f585d4d5f483e72be5.png?raw=true');">
+                    <div class="promo-thumb">
                         <div class="promo-badge">Main Event</div>
+                        <div class="promo-thumb-img" style="background-image: url('https://github.com/tecnotradepty/redcasco/blob/b79bc4401effd37219ce81f19c3bea0f60d1f6f8/imagenes/file_00000000306081f585d4d5f483e72be5.png?raw=true');"></div>
                     </div>
                     <div class="promo-body">
                         <div class="promo-date">Sábado, 29 Oct</div>
                         <h3 class="promo-name">Saturday Night Fever</h3>
                         <div class="promo-footer">
-                            <div style="color: #fff; font-weight: 600;">Desde $40.00</div>
-                            <span class="btn-card-action">Comprar</span>
+                            <div class="promo-price">Tickets desde <strong>$40.00</strong></div>
+                            <span class="btn-card-action">Adquirir</span>
                         </div>
                     </div>
                 </a>
 
                 <a href="paginas/ticket.html" class="promo-card">
-                    <div class="promo-thumb flash-photo" style="background-image: url('https://github.com/tecnotradepty/redcasco/blob/b79bc4401effd37219ce81f19c3bea0f60d1f6f8/imagenes/file_000000002a7081f59c4912e73f62634f.png?raw=true');">
+                    <div class="promo-thumb">
+                        <div class="promo-thumb-img" style="background-image: url('https://github.com/tecnotradepty/redcasco/blob/b79bc4401effd37219ce81f19c3bea0f60d1f6f8/imagenes/file_000000002a7081f59c4912e73f62634f.png?raw=true');"></div>
                     </div>
                     <div class="promo-body">
                         <div class="promo-date">Jueves, 03 Nov</div>
                         <h3 class="promo-name">Fiestas Patrias PTY</h3>
                         <div class="promo-footer">
-                            <div style="color: #fff; font-weight: 600;">Desde $25.00</div>
-                            <span class="btn-card-action">Comprar</span>
+                            <div class="promo-price">Tickets desde <strong>$25.00</strong></div>
+                            <span class="btn-card-action">Adquirir</span>
                         </div>
                     </div>
                 </a>
@@ -544,34 +585,58 @@
         </div>
     </section>
 
-    <section class="section-space" style="background: #040404;">
+    <section class="section-space" style="padding-top: 2rem;">
         <div class="container">
             <div class="section-header" style="border-bottom: none; margin-bottom: 2rem;">
                 <div class="section-title-wrap">
-                    <h2>La Experiencia</h2>
-                    <p style="color: var(--text-muted); margin-top: 0.5rem;">Cultura de club, flash photography y la mejor gente del Casco.</p>
+                    <h2 style="font-size: clamp(2rem, 4vw, 3rem);">El Ambiente</h2>
+                    <p style="color: var(--text-muted); margin-top: 0.5rem; font-size: 0.85rem;">Cultura de club, flash photography y el mejor público.</p>
                 </div>
             </div>
 
             <div class="gallery-grid">
                 <div class="gallery-item g-span-7">
-                    <img src="https://github.com/tecnotradepty/redcasco/blob/b79bc4401effd37219ce81f19c3bea0f60d1f6f8/imagenes/file_00000000306081f585d4d5f483e72be5.png?raw=true" class="gallery-img flash-photo" alt="RED Crowd">
+                    <img src="https://github.com/tecnotradepty/redcasco/blob/b79bc4401effd37219ce81f19c3bea0f60d1f6f8/imagenes/file_00000000306081f585d4d5f483e72be5.png?raw=true" class="gallery-img" alt="RED Crowd">
                     <div class="gallery-caption">Main Room Energy</div>
                 </div>
                 
                 <div class="gallery-item g-span-5">
-                    <img src="https://github.com/tecnotradepty/redcasco/blob/b79bc4401effd37219ce81f19c3bea0f60d1f6f8/imagenes/file_0000000007c881f5a32edb68ce809fe5.png?raw=true" class="gallery-img flash-photo" alt="RED Guests">
-                    <div class="gallery-caption">Exclusive VIP Access</div>
+                    <img src="https://github.com/tecnotradepty/redcasco/blob/b79bc4401effd37219ce81f19c3bea0f60d1f6f8/imagenes/file_0000000007c881f5a32edb68ce809fe5.png?raw=true" class="gallery-img" alt="RED VIP">
+                    <div class="gallery-caption">Exclusive Access</div>
                 </div>
 
                 <div class="gallery-item g-span-5-2">
-                    <img src="https://github.com/tecnotradepty/redcasco/blob/b79bc4401effd37219ce81f19c3bea0f60d1f6f8/imagenes/file_00000000a558820cbe446bd735415308.png?raw=true" class="gallery-img flash-photo" alt="RED Lighting">
+                    <img src="https://github.com/tecnotradepty/redcasco/blob/b79bc4401effd37219ce81f19c3bea0f60d1f6f8/imagenes/file_00000000a558820cbe446bd735415308.png?raw=true" class="gallery-img" alt="RED Lighting">
                     <div class="gallery-caption">Unfiltered Nights</div>
                 </div>
 
                 <div class="gallery-item g-span-12">
-                    <img src="https://github.com/tecnotradepty/redcasco/blob/b79bc4401effd37219ce81f19c3bea0f60d1f6f8/imagenes/file_000000002a7081f59c4912e73f62634f.png?raw=true" class="gallery-img flash-photo" alt="RED Atmosphere">
-                    <div class="gallery-caption">The true Casco Antiguo Experience</div>
+                    <img src="https://github.com/tecnotradepty/redcasco/blob/b79bc4401effd37219ce81f19c3bea0f60d1f6f8/imagenes/file_000000002a7081f59c4912e73f62634f.png?raw=true" class="gallery-img" alt="RED Atmosphere">
+                    <div class="gallery-caption">True Casco Antiguo Experience</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-space">
+        <div class="container">
+            <div class="vip-teaser-block">
+                <div>
+                    <div class="hero-tag" style="margin-bottom: 1rem;">Protocolo de Reserva</div>
+                    <h2 style="font-size: clamp(2rem, 3.5vw, 3rem); margin-bottom: 1rem; line-height: 1.1;">Tu Espacio.<br>Tus Reglas.</h2>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem; max-width: 400px;">
+                        Selecciona tu mesa directamente desde nuestro mapa digital. Consumo mínimo garantizado, fast-pass en la entrada y atención dedicada.
+                    </p>
+                    <a href="paginas/vip.html" class="btn-primary-red">Abrir Mapa de Mesas</a>
+                </div>
+                
+                <div class="mock-map">
+                    <div class="mock-table">T1</div>
+                    <div class="mock-table available">T2</div>
+                    <div class="mock-table">T3</div>
+                    <div class="mock-table available">V1</div>
+                    <div class="mock-table available">V2</div>
+                    <div class="mock-table">V3</div>
                 </div>
             </div>
         </div>
@@ -583,37 +648,37 @@
                 <div>
                     <img src="https://github.com/tecnotradepty/redcasco/blob/6cb2757b42fbf3c33b6b1d084fe620e25caaa940/imagenes/ca85f8d8-87d7-4781-9767-02d599c7c670.png?raw=true" alt="RED Casco Antiguo" class="footer-logo-img">
                     <p class="footer-desc">
-                        El verdadero arranque del Casco Antiguo. High energy, trato exclusivo. Calle 9na, Panamá.
+                        El verdadero arranque del Casco Antiguo. High energy, trato exclusivo. Calle 9na, Ciudad de Panamá.
                     </p>
                 </div>
                 <div>
-                    <div class="footer-col-title">Acceso</div>
+                    <div class="footer-col-title">Accesos Rápidos</div>
                     <ul class="footer-links">
-                        <li><a href="paginas/ticket.html">Comprar Entradas</a></li>
-                        <li><a href="paginas/vip.html">Bottle Service</a></li>
-                        <li><a href="paginas/perfil.html">Mi Taquilla</a></li>
+                        <li><a href="paginas/ticket.html">Cartelera y Boletos</a></li>
+                        <li><a href="paginas/vip.html">Reservar Mesa VIP</a></li>
+                        <li><a href="paginas/perfil.html">Mis Puntos</a></li>
                     </ul>
                 </div>
                 <div>
-                    <div class="footer-col-title">Social</div>
+                    <div class="footer-col-title">Comunidad</div>
                     <ul class="footer-links">
-                        <li><a href="https://www.instagram.com/red_casco_promotor/" target="_blank">Instagram</a></li>
-                        <li><a href="https://wa.me/50760000000" target="_blank">WhatsApp PR</a></li>
+                        <li><a href="https://www.instagram.com/red_casco_promotor/" target="_blank">Instagram Oficial</a></li>
+                        <li><a href="https://wa.me/50760000000" target="_blank">Atención PR (WhatsApp)</a></li>
                     </ul>
                 </div>
                 <div>
-                    <div class="footer-col-title">Horario</div>
-                    <p style="color: var(--text-silver); font-size: 0.85rem; line-height: 1.8;">
+                    <div class="footer-col-title">Horarios & Protocolo</div>
+                    <p style="color: var(--text-silver); font-size: 0.8rem; line-height: 1.8;">
                         Jueves a Sábado<br>
-                        10:00 PM – Late<br>
-                        Dress to impress.
+                        10:00 PM – Hasta el amanecer<br>
+                        <span style="color: var(--red-brand); font-weight: 600;">Dress to impress.</span>
                     </p>
                 </div>
             </div>
 
             <div class="footer-bottom">
-                <div>&copy; 2026 RED CASCO ANTIGUO. ALL RIGHTS RESERVED.</div>
-                <div>CODE BY DISK CREATIVO</div>
+                <div>&copy; 2026 RED CASCO ANTIGUO. RESERVADOS TODOS LOS DERECHOS.</div>
+                <div>ENGINEERED BY DISK CREATIVO</div>
             </div>
         </div>
     </footer>
